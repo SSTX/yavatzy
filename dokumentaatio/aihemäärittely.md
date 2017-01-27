@@ -5,3 +5,5 @@ __Käyttäjät:__ pelaaja(t)
 ###Käyttäjien toiminnot:
 - Noppien heittäminen
 - Tuloksen kirjaaminen
+
+![Luokkakaavio](kaavio.png)

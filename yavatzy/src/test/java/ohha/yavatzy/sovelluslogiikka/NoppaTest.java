@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sovelluslogiikka;
+package ohha.yavatzy.sovelluslogiikka;
 
-import ohha2017_3.yavatzy.sovelluslogiikka.Noppa;
-import org.junit.After;
-import static org.junit.Assert.assertEquals;
+import ohha.yavatzy.sovelluslogiikka.Noppa;
+import ohha.yavatzy.TestRandom;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;

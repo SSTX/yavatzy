@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ohha2017_3.yavatzy.sovelluslogiikka;
+package ohha.yavatzy.sovelluslogiikka;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -18,7 +19,7 @@ public class Noppa {
     private int pisteluku;
 
     public Noppa(int sivujenMaara, Random rand) {
-        if (sivujenMaara < 1) {
+        if (sivujenMaara <= 0) {
             // möbiuksen nauha sallitaan
             sivujenMaara = 1;
         }
@@ -26,15 +27,15 @@ public class Noppa {
         this.rand = rand;
         this.heita();
     }
-    
+
     public Noppa(Random rand) {
         this(6, rand);
     }
-    
+
     public Noppa(int sivujenMaara) {
         this(sivujenMaara, new Random());
     }
-    
+
     public Noppa() {
         this(6, new Random());
     }
@@ -46,7 +47,7 @@ public class Noppa {
     public int getSivujenMaara() {
         return sivujenMaara;
     }
-    
+
     public int getPisteluku() {
         return this.pisteluku;
     }
@@ -59,17 +60,36 @@ public class Noppa {
 
     @Override
     public int hashCode() {
-        return this.getRand().hashCode();
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.rand);
+        hash = 97 * hash + this.sivujenMaara;
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || this.getClass() != obj.getClass()) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Noppa other = (Noppa) obj;
+        if (this.sivujenMaara != other.sivujenMaara) {
+            return false;
+        }
+        if (!Objects.equals(this.rand, other.rand)) {
+            return false;
+        }
+        return true;
+    }
 
-        Noppa noppa = (Noppa) obj;
-        return this.getRand().equals(noppa.getRand());
+    @Override
+    public String toString() {
+        return "" + this.getPisteluku();
     }
 
 }

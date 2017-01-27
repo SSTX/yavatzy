@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ohha2017_3.yavatzy.sovelluslogiikka;
+package ohha.yavatzy.sovelluslogiikka;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,13 @@ public class Pelaaja {
         this.nimi = nimi;
         this.nopat = nopat;
     }
+    
+    public Pelaaja(String nimi) {
+        List<Noppa> nopat = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            nopat.add(new Noppa());
+        }
+    }
 
     public List<Noppa> getNopat() {
         return nopat;
@@ -41,16 +48,18 @@ public class Pelaaja {
                 .map(Noppa::getPisteluku)
                 .collect(Collectors.toList());
     }
-    
-    public void heitaNopat(List<Integer> noppienIndeksit) {
-        
+
+    public void heitaNopat(int[] noppienIndeksit) {
+        for (int i : noppienIndeksit) {
+            if (i >= 0 && i < this.getNopat().size()) {
+                this.getNopat().get(i).heita();
+            }
+        }
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 47 * hash + Objects.hashCode(this.nopat);
-        hash = 47 * hash + Objects.hashCode(this.nimi);
         return hash;
     }
 
@@ -69,11 +78,21 @@ public class Pelaaja {
         if (!Objects.equals(this.nimi, other.nimi)) {
             return false;
         }
-        if (!Objects.equals(this.nopat, other.nopat)) {
-            return false;
-        }
         return true;
     }
 
+
     
+    @Override
+    public String toString() {
+        StringBuilder build = new StringBuilder(this.getNimi());
+        build.append(": ");
+        for (int i : this.nykyisetPisteluvut()) {
+            build.append(i);
+            build.append(" ");
+        }
+        build.delete(build.length() - 1, build.length());
+        return build.toString();
+    }
+
 }

@@ -7,7 +7,6 @@ package ohha.yavatzy.sovelluslogiikka;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -16,6 +15,7 @@ import java.util.Map;
 public class Peli {
 
     private List<Pelaaja> pelaajat;
+    private int vuoroNumero;
     private Pistelista pistelista;
     private int noppienMaara;
     private int nopanSivujenMaara;
@@ -51,6 +51,26 @@ public class Peli {
         return kierros;
     }
 
+    public int getVuoroNumero() {
+        return vuoroNumero;
+    }
+
+    public void seuraavaVuoro() {
+        this.vuoroNumero = (this.vuoroNumero + 1) % this.pelaajienMaara();
+    }
+
+    public int pelaajienMaara() {
+        return this.getPelaajat().size();
+    }
+
+    public boolean peliLoppu() {
+        return this.getKierros() > this.kierroksienKokonaismaara;
+    }
+
+    public Pelaaja vuorossaOlevaPelaaja() {
+        return this.getPelaajat().get(this.getVuoroNumero());
+    }
+
     public void lisaaPelaaja(String nimi) {
         List<Noppa> nopat = new ArrayList<>();
         for (int i = 0; i < this.getNoppienMaara(); i++) {
@@ -64,17 +84,18 @@ public class Peli {
         this.getPistelista().lisaaPelaaja(lisattava);
     }
 
-    public boolean peliLoppu() {
-        return this.getKierros() > this.kierroksienKokonaismaara;
+    public boolean lisaaPisteet(String kierrosNimi, int pisteet) {
+        boolean onnistui = this.getPistelista()
+                .lisaaPisteet(this.vuorossaOlevaPelaaja(), kierrosNimi, pisteet);
+        if (onnistui) {
+            this.seuraavaVuoro();
+        }
+        return onnistui;
+
     }
-    
-    public boolean lisaaPisteet(Pelaaja pelaaja, String kierrosNimi, int pisteet) {
-        return this.getPistelista().lisaaPisteet(pelaaja, kierrosNimi, pisteet);
-    }
-    
-    public String heitaNopat(Pelaaja pelaaja, int[] indeksit) {
-        pelaaja.heitaNopat(indeksit);
-        return pelaaja.nykyisetPisteluvut().toString();
+
+    public void heitaNopat(int[] indeksit) {
+        this.vuorossaOlevaPelaaja().heitaNopat(indeksit);
     }
 
 }

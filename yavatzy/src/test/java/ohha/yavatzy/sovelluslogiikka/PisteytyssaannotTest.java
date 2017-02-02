@@ -40,17 +40,22 @@ public class PisteytyssaannotTest {
     @Test
     public void samatPalauttaaNollaJosKaikissaNopissaEriPisteluku() {
         assertEquals(0, saannot.pari(nopatEiSamoja));
-        assertEquals(0, saannot.kolmoset(nopatEiSamoja));
-        assertEquals(0, saannot.neloset(nopatEiSamoja));
-        assertEquals(0, saannot.vitoset(nopatEiSamoja));
+        assertEquals(0, saannot.kolmoisluku(nopatEiSamoja));
+        assertEquals(0, saannot.neloisluku(nopatEiSamoja));
+        assertEquals(0, saannot.yatzy(nopatEiSamoja));
+    }
+
+    @Test
+    public void samatPalauttaaNollaJosPistelukujaVahemmanKuinVaadittu() {
+        assertEquals(0, saannot.neloisluku(nopatTayskasi));
     }
 
     @Test
     public void samatEiOtaHuomioonEnempaaNoppiaKuinOnMaaritetty() {
         assertEquals(10, saannot.pari(nopatNeljaSamaa));
         assertEquals(8, saannot.pari(nopatTayskasi));
-        assertEquals(15, saannot.kolmoset(nopatNeljaSamaa));
-        assertEquals(24, saannot.neloset(nopatViisiSamaa));
+        assertEquals(15, saannot.kolmoisluku(nopatNeljaSamaa));
+        assertEquals(24, saannot.neloisluku(nopatViisiSamaa));
     }
     
     @Test
@@ -59,17 +64,31 @@ public class PisteytyssaannotTest {
     }
 
     @Test
-    public void kolmosetPalauttaaOikeanSummanJosOnKolmeSamaa() {
-        assertEquals(12, saannot.kolmoset(nopatTayskasi));
+    public void kolmoislukuPalauttaaOikeanSummanJosOnKolmeSamaa() {
+        assertEquals(12, saannot.kolmoisluku(nopatTayskasi));
     }
 
     @Test
-    public void nelosetPalauttaaOikeanSummanJosOnNeljaSamaa() {
-        assertEquals(20, saannot.neloset(nopatNeljaSamaa));
+    public void neloislukuPalauttaaOikeanSummanJosOnNeljaSamaa() {
+        assertEquals(20, saannot.neloisluku(nopatNeljaSamaa));
     }
 
     @Test
-    public void vitosetPalauttaaOikeanSummanJosOnViisiSamaa() {
-        assertEquals(30, saannot.vitoset(nopatViisiSamaa));
+    public void yatzyPalauttaaOikeanSummanJosOnViisiSamaa() {
+        assertEquals(50, saannot.yatzy(nopatViisiSamaa));
+    }
+
+    @Test
+    public void laskePistelukujenSummaPalauttaaNollaJosHaluttuaPistelukuaEiOle() {
+        assertEquals(0, saannot.ykkoset(nopatTayskasi));
+        assertEquals(0, saannot.kolmoset(nopatViisiSamaa));
+    }
+
+    @Test
+    public void laskePistelukujenSummaPalauttaaOikeanSummanJosPistelukujaLoytyy() {
+        assertEquals(5, saannot.vitoset(nopatEiSamoja));
+        assertEquals(4, saannot.kakkoset(nopatKaksiParia));
+        assertEquals(30, saannot.kutoset(nopatViisiSamaa));
     }
 }
+

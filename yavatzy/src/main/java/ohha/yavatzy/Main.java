@@ -24,7 +24,8 @@ public class Main {
         int[] indeksit = {0, 1, 2, 3, 4};
         while (true) {
             System.out.println("Heitetään nopat:");
-            System.out.println(peli.heitaNopat(jalmari, indeksit));
+            peli.heitaNopat(indeksit);
+            System.out.println(jalmari.nykyisetPisteluvut());
             System.out.println("Mihin kierrokseen kirjataan? (lopeta syötteellä 'lopeta')");
             String kierrosNimi = scan.nextLine();
             if (kierrosNimi.equals("lopeta")) {
@@ -32,7 +33,7 @@ public class Main {
             }
             System.out.println("Kuinka monta pistettä?");
             int pisteet = Integer.parseInt(scan.nextLine());
-            peli.lisaaPisteet(jalmari, kierrosNimi, pisteet);
+            peli.lisaaPisteet(kierrosNimi, pisteet);
         }
         System.out.println("Tulostetaan pisteet:");
         System.out.println(peli.getPistelista().getPistelista().get(jalmari));

@@ -9,3 +9,4 @@ Päivä | Tunnit | Kuvaus
 31.1.2017 | 1h | Suunnittelua, logiikan ohjelmointia
 1.2.2017 | 1.5h | logiikan ja testien ohjelmointia
 2.2.2017 | 1h | logiikkaa ja testejä
+3.2.2017 | 2.5h | logiikkaa, testejä, luokkakaavion päivitys

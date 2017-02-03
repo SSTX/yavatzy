@@ -26,7 +26,7 @@ public class Main {
             System.out.println("Heitetään nopat:");
             peli.heitaNopat(indeksit);
             System.out.println(jalmari.nykyisetPisteluvut());
-            System.out.println("Mihin kierrokseen kirjataan? (lopeta syötteellä 'lopeta')");
+            System.out.println("Mihin kierrokseen kirjataan? (esim. pari, kaksi paria, kolmoisluku, iso suora. Lopeta syötteellä 'lopeta')");
             String kierrosNimi = scan.nextLine();
             if (kierrosNimi.equals("lopeta")) {
                 break;

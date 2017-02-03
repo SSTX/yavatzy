@@ -5,9 +5,9 @@
  */
 package ohha.yavatzy.sovelluslogiikka;
 
-import ohha.yavatzy.sovelluslogiikka.Peli;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -56,6 +56,27 @@ public class PeliTest {
         peli.lisaaPelaaja("Jalmari");
         assertEquals(2, peli.getPelaajat().size());
     }
+
+    @Test
+    public void seuraavaVuoroEiKasvataVuoronumeroaYliPelaajienLukumaaran() {
+        peli.lisaaPelaaja("a");
+        peli.lisaaPelaaja("b");
+        peli.lisaaPelaaja("c");
+        for (int i = 0; i < 15; i++) {
+            peli.seuraavaVuoro();
+            assertTrue(peli.getVuoroNumero() < peli.pelaajienMaara());
+        }
+    }
+
+    @Test
+    public void seuraavaVuoroKasvattaaVuoronumeroa() {
+        peli.lisaaPelaaja("a");
+        peli.lisaaPelaaja("b");
+        int alussa = peli.getVuoroNumero();
+        peli.seuraavaVuoro();
+        assertEquals(alussa + 1, peli.getVuoroNumero());
+    }
+
     @After
     public void tearDown() {
     }

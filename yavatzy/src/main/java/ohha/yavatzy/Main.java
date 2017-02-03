@@ -31,9 +31,7 @@ public class Main {
             if (kierrosNimi.equals("lopeta")) {
                 break;
             }
-            System.out.println("Kuinka monta pistettä?");
-            int pisteet = Integer.parseInt(scan.nextLine());
-            peli.lisaaPisteet(kierrosNimi, pisteet);
+            peli.lisaaPisteet(kierrosNimi);
         }
         System.out.println("Tulostetaan pisteet:");
         System.out.println(peli.getPistelista().getPistelista().get(jalmari));

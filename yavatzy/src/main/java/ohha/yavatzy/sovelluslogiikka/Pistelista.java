@@ -12,10 +12,12 @@ import java.util.Map;
  *
  * @author ttiira
  */
+
 public class Pistelista {
 
     private Map<Pelaaja, Map<String, Integer>> pistelista;
 
+    
     public Pistelista() {
         this.pistelista = new HashMap<>();
     }
@@ -31,7 +33,6 @@ public class Pistelista {
         }
         return false;
     }
-    
     
     public boolean lisaaPisteet(Pelaaja pelaaja, String kierrosNimi, int pisteet) {
         Map<String, Integer> pelaajanPisteet = this.getPistelista().get(pelaaja);
@@ -50,5 +51,7 @@ public class Pistelista {
         return 0;
     }
     
-
+    public boolean bonus(Pelaaja pelaaja) {
+        return false;
+    }
 }

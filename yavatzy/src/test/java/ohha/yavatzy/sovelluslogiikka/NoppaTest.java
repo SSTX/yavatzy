@@ -5,11 +5,12 @@
  */
 package ohha.yavatzy.sovelluslogiikka;
 
-import ohha.yavatzy.sovelluslogiikka.Noppa;
+import java.util.Random;
 import ohha.yavatzy.TestRandom;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -57,5 +58,23 @@ public class NoppaTest {
         assertEquals(3, noppa.heita());
     }
     
+    @Test
+    public void equalsToimiiSamallaViitteella() {
+        Noppa testi = noppa;
+        assertTrue(testi.equals(noppa));
+    }
+    
+    @Test
+    public void equalsToimiiJosRandomOnSama() {
+        Random rand = new Random();
+        Noppa n1 = new Noppa(rand);
+        Noppa n2 = new Noppa(rand);
+        assertTrue(n1.equals(n2));
+    }
+    
+    @Test
+    public void toStringPalauttaaOikeanArvon() {
+        assertEquals("2", noppa.toString());
+    }
 
 }

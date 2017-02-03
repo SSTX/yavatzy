@@ -7,6 +7,7 @@ package ohha.yavatzy.sovelluslogiikka;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,6 +30,11 @@ public class PistelistaTest {
         assertEquals(1, lista.getPistelista().keySet().size());
     }
 
+    @Test
+    public void pelaajanLisaysPalauttaaTrueJosLisaaminenOnnistui() {
+        assertTrue(lista.lisaaPelaaja(new Pelaaja("Herra Boole")));
+    }
+    
     @Test
     public void eiLisataSamaaPelaajaaKahdesti() {
         lista.lisaaPelaaja(new Pelaaja("Irmeli"));

@@ -21,6 +21,7 @@ public class Peli {
     private int nopanSivujenMaara;
     private int kierros;
     private int kierroksienKokonaismaara;
+    private Pisteytyssaannot saannot;
 
     public Peli(int noppienMaara, int nopanSivujenMaara) {
         this.kierros = 1;
@@ -29,6 +30,7 @@ public class Peli {
         this.nopanSivujenMaara = nopanSivujenMaara;
         this.pelaajat = new ArrayList<>();
         this.pistelista = new Pistelista();
+        this.saannot = new Pisteytyssaannot();
     }
 
     public List<Pelaaja> getPelaajat() {
@@ -55,8 +57,14 @@ public class Peli {
         return vuoroNumero;
     }
 
+    public Pisteytyssaannot getSaannot() {
+        return saannot;
+    }
+
     public void seuraavaVuoro() {
-        this.vuoroNumero = (this.vuoroNumero + 1) % this.pelaajienMaara();
+        if (!this.getPelaajat().isEmpty()) {
+            this.vuoroNumero = (this.vuoroNumero + 1) % this.pelaajienMaara();
+        }
     }
 
     public int pelaajienMaara() {
@@ -84,14 +92,15 @@ public class Peli {
         this.getPistelista().lisaaPelaaja(lisattava);
     }
 
-    public boolean lisaaPisteet(String kierrosNimi, int pisteet) {
+    public boolean lisaaPisteet(String kierrosNimi) {
+        int pisteet = this.getSaannot()
+                .pisteyta(kierrosNimi, this.vuorossaOlevaPelaaja().getNopat());
         boolean onnistui = this.getPistelista()
                 .lisaaPisteet(this.vuorossaOlevaPelaaja(), kierrosNimi, pisteet);
         if (onnistui) {
             this.seuraavaVuoro();
         }
         return onnistui;
-
     }
 
     public void heitaNopat(int[] indeksit) {

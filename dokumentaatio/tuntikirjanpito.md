@@ -11,3 +11,4 @@ Päivä | Tunnit | Kuvaus
 2.2.2017 | 1h | logiikkaa ja testejä
 3.2.2017 | 2.5h | logiikkaa, testejä, luokkakaavion päivitys
 4.2.2017 | 2h | Koodikatselmointi, git-säätöä
+6.2.2017 | 0.5h | Pisteytyssääntöjen ja testien refaktorointia

@@ -29,50 +29,50 @@ public class Pisteytyssaannot {
         this.yatzyPisteet = 50;
         this.metodit = new HashMap<>();
         // lisätään metodit tauluun
-        metodit.put("ykköset", (a) -> {
-            return this.ykkoset(a);
+        metodit.put("ykköset", (nopat) -> {
+            return this.laskePistelukujenSumma(nopat, 1);
         });
-        metodit.put("kakkoset", (a) -> {
-            return this.kakkoset(a);
+        metodit.put("kakkoset", (nopat) -> {
+            return this.laskePistelukujenSumma(nopat, 2);
         });
-        metodit.put("kolmoset", (a) -> {
-            return this.kolmoset(a);
+        metodit.put("kolmoset", (nopat) -> {
+            return this.laskePistelukujenSumma(nopat, 3);
         });
-        metodit.put("neloset", (a) -> {
-            return this.neloset(a);
+        metodit.put("neloset", (nopat) -> {
+            return this.laskePistelukujenSumma(nopat, 4);
         });
-        metodit.put("vitoset", (a) -> {
-            return this.vitoset(a);
+        metodit.put("vitoset", (nopat) -> {
+            return this.laskePistelukujenSumma(nopat, 5);
         });
-        metodit.put("kutoset", (a) -> {
-            return this.kutoset(a);
+        metodit.put("kutoset", (nopat) -> {
+            return this.laskePistelukujenSumma(nopat, 6);
         });
-        metodit.put("pari", (a) -> {
-            return this.pari(a);
+        metodit.put("pari", (nopat) -> {
+            return this.montaSamaa(nopat, 2);
         });
-        metodit.put("kaksi paria", (a) -> {
-            return this.kaksiParia(a);
+        metodit.put("kaksi paria", (nopat) -> {
+            return this.kaksiParia(nopat);
         });
-        metodit.put("kolmoisluku", (a) -> {
-            return this.kolmoisluku(a);
+        metodit.put("kolmoisluku", (nopat) -> {
+            return this.montaSamaa(nopat, 3);
         });
-        metodit.put("neloisluku", (a) -> {
-            return this.neloisluku(a);
+        metodit.put("neloisluku", (nopat) -> {
+            return this.montaSamaa(nopat, 4);
         });
-        metodit.put("pieni suora", (a) -> {
-            return this.pieniSuora(a);
+        metodit.put("pieni suora", (nopat) -> {
+            return this.pieniSuora(nopat);
         });
-        metodit.put("iso suora", (a) -> {
-            return this.isoSuora(a);
+        metodit.put("iso suora", (nopat) -> {
+            return this.isoSuora(nopat);
         });
-        metodit.put("täyskäsi", (a) -> {
-            return this.tayskasi(a);
+        metodit.put("täyskäsi", (nopat) -> {
+            return this.tayskasi(nopat);
         });
-        metodit.put("sattuma", (a) -> {
-            return this.sattuma(a);
+        metodit.put("sattuma", (nopat) -> {
+            return this.sattuma(nopat);
         });
-        metodit.put("yatzy", (a) -> {
-            return this.yatzy(a);
+        metodit.put("yatzy", (nopat) -> {
+            return this.yatzy(nopat);
         });
     }
 
@@ -124,10 +124,6 @@ public class Pisteytyssaannot {
         return nopat.stream().collect(Collectors.groupingBy(Noppa::getPisteluku));
     }
 
-    public int pari(List<Noppa> nopat) {
-        return this.montaSamaa(nopat, 2);
-    }
-
     public int kaksiParia(List<Noppa> nopat) {
         int pareja = 0;
         int tulos = 0;
@@ -145,43 +141,11 @@ public class Pisteytyssaannot {
         return 0;
     }
 
-    public int kolmoisluku(List<Noppa> nopat) {
-        return this.montaSamaa(nopat, 3);
-    }
-
-    public int neloisluku(List<Noppa> nopat) {
-        return this.montaSamaa(nopat, 4);
-    }
-
     public int yatzy(List<Noppa> nopat) {
         if (this.montaSamaa(nopat, 5) > 0) {
             return this.yatzyPisteet;
         }
         return 0;
-    }
-
-    public int ykkoset(List<Noppa> nopat) {
-        return this.laskePistelukujenSumma(nopat, 1);
-    }
-
-    public int kakkoset(List<Noppa> nopat) {
-        return this.laskePistelukujenSumma(nopat, 2);
-    }
-
-    public int kolmoset(List<Noppa> nopat) {
-        return this.laskePistelukujenSumma(nopat, 3);
-    }
-
-    public int neloset(List<Noppa> nopat) {
-        return this.laskePistelukujenSumma(nopat, 4);
-    }
-
-    public int vitoset(List<Noppa> nopat) {
-        return this.laskePistelukujenSumma(nopat, 5);
-    }
-
-    public int kutoset(List<Noppa> nopat) {
-        return this.laskePistelukujenSumma(nopat, 6);
     }
 
     public int tayskasi(List<Noppa> nopat) {
@@ -191,10 +155,10 @@ public class Pisteytyssaannot {
             List<Noppa> valitut = pisteluvuittain.get(pisteluku);
             switch (valitut.size()) {
                 case 2:
-                    tulos += this.pari(valitut);
+                    tulos += this.montaSamaa(valitut, 2);
                     break;
                 case 3:
-                    tulos += this.kolmoisluku(valitut);
+                    tulos += this.montaSamaa(valitut, 3);
                     break;
                 default:
                     //jos on samaa pistelukua muu määrä kuin 2 tai 3, ei ole täyskäsi

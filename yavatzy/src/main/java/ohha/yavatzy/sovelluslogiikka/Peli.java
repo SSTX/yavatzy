@@ -22,6 +22,7 @@ public class Peli {
     private int kierros;
     private int kierroksienKokonaismaara;
     private Pisteytyssaannot saannot;
+    private int[] valitutNopat;
 
     public Peli(int noppienMaara, int nopanSivujenMaara) {
         this.kierros = 1;
@@ -31,6 +32,7 @@ public class Peli {
         this.pelaajat = new ArrayList<>();
         this.pistelista = new Pistelista();
         this.saannot = new Pisteytyssaannot();
+        this.valitutNopat = new int[noppienMaara];
     }
 
     public List<Pelaaja> getPelaajat() {
@@ -59,6 +61,10 @@ public class Peli {
 
     public Pisteytyssaannot getSaannot() {
         return saannot;
+    }
+
+    public int[] valitutNopat() {
+        return this.valitutNopat;
     }
 
     public void seuraavaVuoro() {

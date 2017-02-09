@@ -84,11 +84,11 @@ public class Pisteytyssaannot {
         return 0;
     }
 
-    public List<Integer> muunnaPisteluvuiksi(List<Noppa> nopat) {
+    private List<Integer> muunnaPisteluvuiksi(List<Noppa> nopat) {
         return nopat.stream().map(Noppa::getPisteluku).collect(Collectors.toList());
     }
 
-    public boolean kaikkiEri(List<Noppa> nopat) {
+    private boolean kaikkiEri(List<Noppa> nopat) {
         Map<Integer, List<Noppa>> pisteluvuittain = this.ryhmittelePisteluvunMukaan(nopat);
         for (int i : pisteluvuittain.keySet()) {
             if (pisteluvuittain.get(i).size() > 1) {
@@ -98,7 +98,7 @@ public class Pisteytyssaannot {
         return true;
     }
 
-    public int montaSamaa(List<Noppa> nopat, int kuinkaMonta) {
+    private int montaSamaa(List<Noppa> nopat, int kuinkaMonta) {
         Map<Integer, List<Noppa>> pisteluvuittain = this.ryhmittelePisteluvunMukaan(nopat);
         int suurin = 0;
         for (int i : pisteluvuittain.keySet()) {
@@ -110,7 +110,7 @@ public class Pisteytyssaannot {
         return suurin;
     }
 
-    public int laskePistelukujenSumma(List<Noppa> nopat, int haluttuPisteluku) {
+    private int laskePistelukujenSumma(List<Noppa> nopat, int haluttuPisteluku) {
         int summa = 0;
         for (int i : this.muunnaPisteluvuiksi(nopat)) {
             if (i == haluttuPisteluku) {
@@ -124,7 +124,7 @@ public class Pisteytyssaannot {
         return nopat.stream().collect(Collectors.groupingBy(Noppa::getPisteluku));
     }
 
-    public int kaksiParia(List<Noppa> nopat) {
+    private int kaksiParia(List<Noppa> nopat) {
         int pareja = 0;
         int tulos = 0;
         Map<Integer, List<Noppa>> pisteluvuittain = this.ryhmittelePisteluvunMukaan(nopat);
@@ -141,14 +141,14 @@ public class Pisteytyssaannot {
         return 0;
     }
 
-    public int yatzy(List<Noppa> nopat) {
+    private int yatzy(List<Noppa> nopat) {
         if (this.montaSamaa(nopat, 5) > 0) {
             return this.yatzyPisteet;
         }
         return 0;
     }
 
-    public int tayskasi(List<Noppa> nopat) {
+    private int tayskasi(List<Noppa> nopat) {
         Map<Integer, List<Noppa>> pisteluvuittain = this.ryhmittelePisteluvunMukaan(nopat);
         int tulos = 0;
         for (int pisteluku : pisteluvuittain.keySet()) {
@@ -168,21 +168,21 @@ public class Pisteytyssaannot {
         return tulos;
     }
 
-    public int pieniSuora(List<Noppa> nopat) {
+    private int pieniSuora(List<Noppa> nopat) {
         if (this.kaikkiEri(nopat) && this.muunnaPisteluvuiksi(nopat).contains(1)) {
             return this.pieniSuoraPisteet;
         }
         return 0;
     }
 
-    public int isoSuora(List<Noppa> nopat) {
+    private int isoSuora(List<Noppa> nopat) {
         if (this.kaikkiEri(nopat) && this.muunnaPisteluvuiksi(nopat).contains(6)) {
             return this.isoSuoraPisteet;
         }
         return 0;
     }
 
-    public int sattuma(List<Noppa> nopat) {
+    private int sattuma(List<Noppa> nopat) {
         return nopat.stream().mapToInt(Noppa::getPisteluku).sum();
     }
 }

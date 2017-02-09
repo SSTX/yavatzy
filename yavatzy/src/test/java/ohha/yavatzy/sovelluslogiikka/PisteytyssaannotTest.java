@@ -42,114 +42,114 @@ public class PisteytyssaannotTest {
 
     @Test
     public void montaSamaaPalauttaaNollaJosKaikissaNopissaEriPisteluku() {
-        assertEquals(0, saannot.montaSamaa(nopatPieniSuora, 2));
-        assertEquals(0, saannot.montaSamaa(nopatPieniSuora, 3));
-        assertEquals(0, saannot.montaSamaa(nopatPieniSuora, 4));
-        assertEquals(0, saannot.yatzy(nopatPieniSuora));
+        assertEquals(0, saannot.pisteyta("pari", nopatPieniSuora));
+        assertEquals(0, saannot.pisteyta("kolmoisluku", nopatPieniSuora));
+        assertEquals(0, saannot.pisteyta("neloisluku", nopatPieniSuora));
+        assertEquals(0, saannot.pisteyta("yatzy", nopatPieniSuora));
     }
 
     @Test
     public void montaSamaaPalauttaaNollaJosPistelukujaVahemmanKuinVaadittu() {
-        assertEquals(0, saannot.montaSamaa(nopatTayskasi, 4));
+        assertEquals(0, saannot.pisteyta("neloisluku", nopatTayskasi));
     }
 
     @Test
     public void montaSamaaEiOtaHuomioonEnempaaNoppiaKuinOnMaaritetty() {
-        assertEquals(10, saannot.montaSamaa(nopatNeljaSamaa, 2));
-        assertEquals(8, saannot.montaSamaa(nopatTayskasi, 2));
-        assertEquals(15, saannot.montaSamaa(nopatNeljaSamaa, 3));
-        assertEquals(24, saannot.montaSamaa(nopatViisiSamaa, 4));
+        assertEquals(10, saannot.pisteyta("pari", nopatNeljaSamaa));
+        assertEquals(8, saannot.pisteyta("pari", nopatTayskasi));
+        assertEquals(15, saannot.pisteyta("kolmoisluku", nopatNeljaSamaa));
+        assertEquals(24, saannot.pisteyta("neloisluku", nopatViisiSamaa));
     }
 
     @Test
     public void pariPalauttaaSuurimmanSummanJosUseitaVaihtoehtoja() {
-        assertEquals(4, saannot.montaSamaa(nopatKaksiParia, 2));
+        assertEquals(4, saannot.pisteyta("pari", nopatKaksiParia));
     }
 
     @Test
     public void kolmoislukuPalauttaaOikeanSummanJosOnKolmeSamaa() {
-        assertEquals(12, saannot.montaSamaa(nopatTayskasi, 3));
+        assertEquals(12, saannot.pisteyta("kolmoisluku", nopatTayskasi));
     }
 
     @Test
     public void neloislukuPalauttaaOikeanSummanJosOnNeljaSamaa() {
-        assertEquals(20, saannot.montaSamaa(nopatNeljaSamaa, 4));
+        assertEquals(20, saannot.pisteyta("neloisluku", nopatNeljaSamaa));
     }
 
     @Test
     public void yatzyPalauttaaOikeanSummanJosOnViisiSamaa() {
-        assertEquals(50, saannot.yatzy(nopatViisiSamaa));
+        assertEquals(50, saannot.pisteyta("yatzy", nopatViisiSamaa));
     }
 
     @Test
     public void laskePistelukujenSummaPalauttaaNollaJosHaluttuaPistelukuaEiOle() {
-        assertEquals(0, saannot.laskePistelukujenSumma(nopatTayskasi, 1));
-        assertEquals(0, saannot.laskePistelukujenSumma(nopatViisiSamaa, 3));
+        assertEquals(0, saannot.pisteyta("ykköset", nopatTayskasi));
+        assertEquals(0, saannot.pisteyta("kolmoset", nopatViisiSamaa));
     }
 
     @Test
     public void laskePistelukujenSummaPalauttaaOikeanSummanJosPistelukujaLoytyy() {
-        assertEquals(5, saannot.laskePistelukujenSumma(nopatPieniSuora, 5));
-        assertEquals(4, saannot.laskePistelukujenSumma(nopatKaksiParia, 2));
-        assertEquals(30, saannot.laskePistelukujenSumma(nopatViisiSamaa, 6));
+        assertEquals(5, saannot.pisteyta("vitoset", nopatPieniSuora));
+        assertEquals(4, saannot.pisteyta("kakkoset", nopatKaksiParia));
+        assertEquals(30, saannot.pisteyta("kutoset", nopatViisiSamaa));
     }
 
     @Test
     public void tayskasiPalauttaaNollaJosEiKaksiSamaaJaKolmeSamaa() {
-        assertEquals(0, saannot.tayskasi(nopatPieniSuora));
-        assertEquals(0, saannot.tayskasi(nopatViisiSamaa));
-        assertEquals(0, saannot.tayskasi(nopatNeljaSamaa));
-        assertEquals(0, saannot.tayskasi(nopatKaksiParia));
+        assertEquals(0, saannot.pisteyta("täyskäsi", nopatPieniSuora));
+        assertEquals(0, saannot.pisteyta("täyskäsi", nopatViisiSamaa));
+        assertEquals(0, saannot.pisteyta("täyskäsi",  nopatNeljaSamaa));
+        assertEquals(0, saannot.pisteyta("täyskäsi", nopatKaksiParia));
     }
     
     @Test
     public void taysKasiPalauttaaOikeanSummanJosOnKaksiSamaaJaKolmeSamaa() {
-        assertEquals(18, saannot.tayskasi(nopatTayskasi));
+        assertEquals(18, saannot.pisteyta("täyskäsi", nopatTayskasi));
     }
     
     @Test
     public void pieniSuoraPalauttaaNollaJosEiPientaSuoraa() {
-        assertEquals(0, saannot.pieniSuora(nopatKaksiParia));
-        assertEquals(0, saannot.pieniSuora(nopatViisiSamaa));
-        assertEquals(0, saannot.pieniSuora(nopatIsoSuora));
+        assertEquals(0, saannot.pisteyta("pieni suora", nopatKaksiParia));
+        assertEquals(0, saannot.pisteyta("pieni suora", nopatViisiSamaa));
+        assertEquals(0, saannot.pisteyta("pieni suora", nopatIsoSuora));
     }
     
     @Test
     public void pieniSuoraPalauttaaOikeinJosOnPieniSuora() {
-        assertEquals(15, saannot.pieniSuora(nopatPieniSuora));
+        assertEquals(15, saannot.pisteyta("pieni suora", nopatPieniSuora));
     }
     
      @Test
     public void isoSuoraPalauttaaNollaJosEiIsoaSuoraa() {
-        assertEquals(0, saannot.isoSuora(nopatKaksiParia));
-        assertEquals(0, saannot.isoSuora(nopatViisiSamaa));
-        assertEquals(0, saannot.isoSuora(nopatPieniSuora));
+        assertEquals(0, saannot.pisteyta("iso suora", nopatKaksiParia));
+        assertEquals(0, saannot.pisteyta("iso suora", nopatViisiSamaa));
+        assertEquals(0, saannot.pisteyta("iso suora", nopatPieniSuora));
     }
     
     @Test
     public void isoSuoraPalauttaaOikeinJosOnIsoSuora() {
-        assertEquals(20, saannot.isoSuora(nopatIsoSuora));
+        assertEquals(20, saannot.pisteyta("iso suora", nopatIsoSuora));
     }
     
     @Test
     public void sattumaPalauttaaOikeanSumman() {
-        assertEquals(20, saannot.sattuma(nopatIsoSuora));
-        assertEquals(18, saannot.sattuma(nopatTayskasi));
-        assertEquals(9, saannot.sattuma(nopatKaksiParia));
-        assertEquals(30, saannot.sattuma(nopatViisiSamaa));
-        assertEquals(21, saannot.sattuma(nopatNeljaSamaa));
+        assertEquals(20, saannot.pisteyta("sattuma", nopatIsoSuora));
+        assertEquals(18, saannot.pisteyta("sattuma", nopatTayskasi));
+        assertEquals(9, saannot.pisteyta("sattuma", nopatKaksiParia));
+        assertEquals(30, saannot.pisteyta("sattuma", nopatViisiSamaa));
+        assertEquals(21, saannot.pisteyta("sattuma", nopatNeljaSamaa));
     }
     
     @Test
     public void kaksiPariaPalauttaaNollaJosEiKahtaParia() {
-        assertEquals(0, saannot.kaksiParia(nopatPieniSuora));
-        assertEquals(0, saannot.kaksiParia(nopatViisiSamaa));
-        assertEquals(0, saannot.kaksiParia(nopatNeljaSamaa));
+        assertEquals(0, saannot.pisteyta("kaksi paria", nopatPieniSuora));
+        assertEquals(0, saannot.pisteyta("kaksi paria", nopatViisiSamaa));
+        assertEquals(0, saannot.pisteyta("kaksi paria", nopatNeljaSamaa));
     }
     
     @Test
     public void kaksiPariaPalauttaaOikeanSummanJosOnKaksiParia() {
-        assertEquals(14, saannot.kaksiParia(nopatTayskasi));
-        assertEquals(6, saannot.kaksiParia(nopatKaksiParia));
+        assertEquals(14, saannot.pisteyta("kaksi paria", nopatTayskasi));
+        assertEquals(6, saannot.pisteyta("kaksi paria", nopatKaksiParia));
     }
 }

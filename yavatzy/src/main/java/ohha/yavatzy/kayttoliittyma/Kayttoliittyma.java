@@ -1,7 +1,5 @@
 package ohha.yavatzy.kayttoliittyma;
 
-import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanValintaKuuntelija;
-import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanHeittoKuuntelija;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -19,6 +17,8 @@ import ohha.yavatzy.sovelluslogiikka.Noppa;
 import ohha.yavatzy.sovelluslogiikka.Peli;
 import ohha.yavatzy.KierrosNimet;
 import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.PisteidenKirjausKuuntelija;
+import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanValintaKuuntelija;
+import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanHeittoKuuntelija;
 
 /**
  * Graafinen käyttöliittymä yatzy-pelille. Luo ikkunan ja käyttöliittymän

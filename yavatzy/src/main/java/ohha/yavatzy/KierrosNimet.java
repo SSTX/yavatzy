@@ -6,31 +6,34 @@
 package ohha.yavatzy;
 
 /**
- *
+ * Luokka joka säilöö yatzy-kierrosten nimet.
  * @author ttiira
  */
 public class KierrosNimet {
 
-    private static final String[] kierrokset
-            = new String[]{
-                "ykköset",
-                "kakkoset",
-                "kolmoset",
-                "neloset",
-                "vitoset",
-                "kutoset",
-                "pari",
-                "kaksi paria",
-                "kolmoisluku",
-                "neloisluku",
-                "yatzy",
-                "pieni suora",
-                "iso suora",
-                "täyskäsi",
-                "sattuma"
-            };
+    private static final String[] KIERROKSET = new String[] {
+        "ykköset",
+        "kakkoset",
+        "kolmoset",
+        "neloset",
+        "vitoset",
+        "kutoset",
+        "pari",
+        "kaksi paria",
+        "kolmoisluku",
+        "neloisluku",
+        "yatzy",
+        "pieni suora",
+        "iso suora",
+        "täyskäsi",
+        "sattuma"
+    };
 
+    /**
+     * Palauttaa yatzy-kierrosten nimet taulukkona.
+     * @return kierrosten nimet
+     */
     public static String[] kierrosNimet() {
-        return kierrokset;
+        return KIERROKSET;
     }
 }

@@ -14,3 +14,4 @@ Päivä | Tunnit | Kuvaus
 6.2.2017 | 0.5h | Pisteytyssääntöjen ja testien refaktorointia
 7.2.2017 | 1h | Käyttöliittymän suunnitelua, toteutuksen aloitus
 8.2.2017 | 2h | Käyttöliittymän ohjelmointia, pisteytyssääntöjen ja testien refaktorointia
+10.2 | 11h | Käyttöliittymän ohjelmointia, refaktorointia, testejä

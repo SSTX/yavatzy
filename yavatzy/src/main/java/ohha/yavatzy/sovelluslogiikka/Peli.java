@@ -22,7 +22,7 @@ public class Peli {
     private int kierros;
     private int kierroksienKokonaismaara;
     private Pisteytyssaannot saannot;
-    private int[] valitutNopat;
+    private ArrayList<Integer> valitutNopat;
 
     public Peli(int noppienMaara, int nopanSivujenMaara) {
         this.kierros = 1;
@@ -32,7 +32,7 @@ public class Peli {
         this.pelaajat = new ArrayList<>();
         this.pistelista = new Pistelista();
         this.saannot = new Pisteytyssaannot();
-        this.valitutNopat = new int[noppienMaara];
+        this.valitutNopat = new ArrayList<>();
     }
 
     public List<Pelaaja> getPelaajat() {
@@ -63,8 +63,16 @@ public class Peli {
         return saannot;
     }
 
-    public int[] valitutNopat() {
+    public List<Integer> getValitutNopat() {
         return this.valitutNopat;
+    }
+
+    public void valitseNoppa(int indeksi) {
+        this.getValitutNopat().add(indeksi);
+    }
+
+    public void poistaNopanValinta(int indeksi) {
+        this.getValitutNopat().remove(Integer.valueOf(indeksi));
     }
 
     public void seuraavaVuoro() {
@@ -109,7 +117,7 @@ public class Peli {
         return onnistui;
     }
 
-    public void heitaNopat(int[] indeksit) {
+    public void heitaNopat(List<Integer> indeksit) {
         this.vuorossaOlevaPelaaja().heitaNopat(indeksit);
     }
 

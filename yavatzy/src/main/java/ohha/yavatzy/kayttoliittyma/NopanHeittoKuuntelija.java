@@ -13,6 +13,6 @@ public class NopanHeittoKuuntelija implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        this.peli.heitaNopat(this.peli.valitutNopat());
+        this.peli.heitaNopat(this.peli.getValitutNopat());
     }
 }

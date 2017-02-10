@@ -5,15 +5,18 @@
  */
 package ohha.yavatzy.sovelluslogiikka;
 
-import ohha.yavatzy.sovelluslogiikka.Noppa;
-import ohha.yavatzy.sovelluslogiikka.Pelaaja;
-import ohha.yavatzy.TestRandom;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
+
+import ohha.yavatzy.TestRandom;
+import ohha.yavatzy.sovelluslogiikka.Noppa;
+import ohha.yavatzy.sovelluslogiikka.Pelaaja;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  *
@@ -55,7 +58,11 @@ public class PelaajaTest {
     @Test
     public void heitaNopatHylkaaOlemattomatNopat() {
         int[] luvut = {-1, 6, 10};
-        pelaaja.heitaNopat(luvut);
+        List<Integer> lista = new ArrayList<>();
+        for (int i : luvut) {
+            lista.add(i);
+        }
+        pelaaja.heitaNopat(lista);
         for (int i = 0; i < 5; i++) {
             assertEquals((long) i + 2, pelaaja.getNopat().get(i).getPisteluku());
         }
@@ -64,7 +71,11 @@ public class PelaajaTest {
     @Test
     public void heitaNopatMuuttaaOikeidenNoppienPistelukuja() {
         int[] luvut = {0, 1, 3, 4};
-        pelaaja.heitaNopat(luvut);
+        List<Integer> lista = new ArrayList<>();
+        for (int i : luvut) {
+            lista.add(i);
+        }
+        pelaaja.heitaNopat(lista);
         //indeksi 2 ei muutu
         assertEquals(4, pelaaja.getNopat().get(2).getPisteluku());
         //indeksit 0, 1, 3, 4 muuttuvat

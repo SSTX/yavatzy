@@ -49,7 +49,7 @@ public class Pelaaja {
                 .collect(Collectors.toList());
     }
 
-    public void heitaNopat(int[] noppienIndeksit) {
+    public void heitaNopat(List<Integer> noppienIndeksit) {
         for (int i : noppienIndeksit) {
             if (i >= 0 && i < this.getNopat().size()) {
                 this.getNopat().get(i).heita();

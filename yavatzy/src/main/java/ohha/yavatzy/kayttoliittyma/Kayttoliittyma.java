@@ -2,6 +2,8 @@ package ohha.yavatzy.kayttoliittyma;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -31,13 +33,14 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
+        container.setLayout(new GridBagLayout());
         JButton heitaNopatNappi = new JButton("Heitä nopat");
         container.add(heitaNopatNappi);
         heitaNopatNappi.addActionListener(new NopanHeittoKuuntelija(this.peli));
         for (int i = 0; i < this.getPeli().getNoppienMaara(); i++) {
             JButton noppaNappi = new JButton(Integer.toString(i));
             container.add(noppaNappi);
-            noppaNappi.addActionListener(new NopanValintaKuuntelija(this.peli, noppaNappi));
+            noppaNappi.addActionListener(new NopanValintaKuuntelija(this.peli, noppaNappi, i));
         }
     }
 }

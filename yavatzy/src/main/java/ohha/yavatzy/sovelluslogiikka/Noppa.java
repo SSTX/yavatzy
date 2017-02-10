@@ -9,8 +9,8 @@ import java.util.Objects;
 import java.util.Random;
 
 /**
- *
- * @author ttiira
+ * Luokka simuloi nopan toimintaa. Sivujen määrä voi olla mikä tahansa nollaa
+ * suurempi kokonaisluku
  */
 public class Noppa {
 
@@ -18,6 +18,11 @@ public class Noppa {
     private int sivujenMaara;
     private int pisteluku;
 
+    /**
+     * Luodaan noppa annetuilla arvoilla.
+     * @param sivujenMaara nopan sivujen määrä
+     * @param rand satunnaisuuden toteuttava olio
+     */
     public Noppa(int sivujenMaara, Random rand) {
         if (sivujenMaara <= 0) {
             // möbiuksen nauha sallitaan
@@ -28,14 +33,27 @@ public class Noppa {
         this.heita();
     }
 
+    /**
+     * Luodaan noppa oletussivumäärällä.
+     *
+     * @param rand pistelukujen arpomiseen tarvittava Random-olio
+     */
     public Noppa(Random rand) {
         this(6, rand);
     }
 
+    /**
+     * Luodaan noppa oletussatunnaisuudella.
+     *
+     * @param sivujenMaara nopan sivujen määrä
+     */
     public Noppa(int sivujenMaara) {
         this(sivujenMaara, new Random());
     }
 
+    /**
+     * Luodaan noppa oletusarvoilla.
+     */
     public Noppa() {
         this(6, new Random());
     }
@@ -52,6 +70,12 @@ public class Noppa {
         return this.pisteluku;
     }
 
+    /**
+     * Tallennetaan nopan pisteluvuksi uusi satunnainen kokonaisluku väliltä
+     * 1..nopan sivujen määrä.
+     *
+     * @return saatu pisteluku
+     */
     public int heita() {
         int tulos = this.getRand().nextInt(this.getSivujenMaara()) + 1;
         this.pisteluku = tulos;

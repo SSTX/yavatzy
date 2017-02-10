@@ -18,27 +18,30 @@ import org.junit.Test;
 public class PistelistaTest {
 
     Pistelista lista;
+    Pelaaja jalmari;
 
     @Before
     public void setUp() {
         lista = new Pistelista();
+        jalmari = new Pelaaja("Jalmari");
+        lista.lisaaPelaaja(jalmari);
     }
 
     @Test
     public void pelaajanLisaysLisaaPelaajan() {
-        lista.lisaaPelaaja(new Pelaaja("Irmeli"));
         assertEquals(1, lista.getPistelista().keySet().size());
+        lista.lisaaPelaaja(new Pelaaja("Irmeli"));
+        assertEquals(2, lista.getPistelista().keySet().size());
     }
 
     @Test
     public void pelaajanLisaysPalauttaaTrueJosLisaaminenOnnistui() {
         assertTrue(lista.lisaaPelaaja(new Pelaaja("Herra Boole")));
     }
-    
+
     @Test
     public void eiLisataSamaaPelaajaaKahdesti() {
-        lista.lisaaPelaaja(new Pelaaja("Irmeli"));
-        lista.lisaaPelaaja(new Pelaaja("Irmeli"));
+        lista.lisaaPelaaja(new Pelaaja("Jalmari"));
         assertEquals(1, lista.getPistelista().keySet().size());
     }
 
@@ -67,6 +70,50 @@ public class PistelistaTest {
         lista.lisaaPisteet(irmeli, "pari", 2);
         lista.lisaaPisteet(irmeli, "pari", 4);
         assertEquals(2, lista.pelaajanPisteetKierrokselta(irmeli, "pari"));
+    }
+
+    @Test
+    public void pelaajanKokonaisPisteetOikein1() {
+        assertEquals(0, lista.pelaajanKokonaisPisteet(jalmari));
+    }
+
+    @Test
+    public void pelaajanKokonaisPisteetOikein2() {
+        lista.lisaaPisteet(jalmari, "pari", 2);
+        lista.lisaaPisteet(jalmari, "kolmoisluku", 9);
+        assertEquals(11, lista.pelaajanKokonaisPisteet(jalmari));
+    }
+
+    @Test
+    public void pelaajanKokonaisPisteetOikein3() {
+        lista.lisaaPisteet(jalmari, "yatzy", 50);
+        lista.lisaaPisteet(jalmari, "neloisluku", 24);
+        lista.lisaaPisteet(jalmari, "kutoset", 30);
+        assertEquals(104, lista.pelaajanKokonaisPisteet(jalmari));
+    }
+
+    @Test
+    public void pelaajanKokonaisPisteetOikeinBonus1() {
+        lista.lisaaPisteet(jalmari, "kutoset", 30);
+        lista.lisaaPisteet(jalmari, "vitoset", 25);
+        lista.lisaaPisteet(jalmari, "neloset", 8);
+        assertEquals(113, lista.pelaajanKokonaisPisteet(jalmari));
+    }
+
+    @Test
+    public void pelaajanKokonaisPisteetOikeinBonus2() {
+        lista.lisaaPisteet(jalmari, "kutoset", 30);
+        lista.lisaaPisteet(jalmari, "vitoset", 25);
+        lista.lisaaPisteet(jalmari, "kolmoset", 9);
+        assertEquals(114, lista.pelaajanKokonaisPisteet(jalmari));
+    }
+
+    @Test
+    public void pelaajanKokonaisPisteetOikeinBonus3() {
+        lista.lisaaPisteet(jalmari, "kutoset", 30);
+        lista.lisaaPisteet(jalmari, "neloset", 20);
+        lista.lisaaPisteet(jalmari, "kolmoset", 12);
+        assertEquals(62, lista.pelaajanKokonaisPisteet(jalmari));
     }
 
     @After

@@ -12,17 +12,27 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- *
- * @author ttiira
+ * Laskee pistemäärän, jonka nopat antavat tietylle yatzy-kierrokselle. Tarjoaa
+ * yhden julkisen metodin, joka valitsee oikeat säännöt kierroksen nimen
+ * (merkkijono) perusteella.
  */
 public class Pisteytyssaannot {
 
     private int pieniSuoraPisteet;
     private int isoSuoraPisteet;
     private int yatzyPisteet;
-    // liitetään kierroksen nimen ilmaisevaan merkkijonoon pisteytysmetodi
+
+    /**
+     * Hajautustaulun avaimet ovat yatzy-kierroksen nimiä. Arvot ovat
+     * funktioita, jotka liittävät listaan noppia kokonaislukuarvon eli sen
+     * pistemäärän, jonka nopat antavat avaimen määrämälle kierrokselle.
+     */
     private Map<String, Function<List<Noppa>, Integer>> metodit;
 
+    /**
+     * Luodaan pisteytyssäännöt. Lisätään merkkijono-funktio -parit
+     * hajautustauluun.
+     */
     public Pisteytyssaannot() {
         this.pieniSuoraPisteet = 15;
         this.isoSuoraPisteet = 20;
@@ -76,6 +86,16 @@ public class Pisteytyssaannot {
         });
     }
 
+    /**
+     * Pisteyttää parametrina tulevat nopat annetun kierroksen sääntöjen mukaan.
+     * @param kierrosNimi Merkkijono, joka ilmoittaa yatzy-kierroksen nimen.
+     * Pisteet lasketaan merkkijonoon liitetyt metodin avulla.
+     * @param nopat Noppa-oliot, joiden pistelukujen perusteella pisteet
+     * lasketaan.
+     * @return Noppien pistelukujen sallima suurin pistemäärä halutulle
+     * kierrokselle. Jos kierrokselle ei ole pisteytyssääntöjä, palautetaan
+     * nolla.
+     */
     public int pisteyta(String kierrosNimi, List<Noppa> nopat) {
         if (this.metodit.get(kierrosNimi) != null) {
             return this.metodit.get(kierrosNimi).apply(nopat);

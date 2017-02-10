@@ -11,55 +11,31 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- *
- * @author ttiira
+ * Kuvaa yatzy-pelin pelaajaa.
+ * Käytetään pääosin pistelistan hajautustaulun avaimena.
  */
 public class Pelaaja {
 
-    private List<Noppa> nopat;
     private String nimi;
-
-    public Pelaaja(String nimi, List<Noppa> nopat) {
+    /**
+     * Luodaan pelaaja annetulla nimellä.
+     * @param nimi pelaajan nimi
+     */
+    public Pelaaja(String nimi) {
         if (nimi.isEmpty()) {
             nimi = "Anonyymi";
         }
         this.nimi = nimi;
-        this.nopat = nopat;
-    }
-    
-    public Pelaaja(String nimi) {
-        List<Noppa> nopat = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            nopat.add(new Noppa());
-        }
-    }
-
-    public List<Noppa> getNopat() {
-        return nopat;
     }
 
     public String getNimi() {
         return nimi;
     }
 
-    public List<Integer> nykyisetPisteluvut() {
-        return this.getNopat()
-                .stream()
-                .map(Noppa::getPisteluku)
-                .collect(Collectors.toList());
-    }
-
-    public void heitaNopat(List<Integer> noppienIndeksit) {
-        for (int i : noppienIndeksit) {
-            if (i >= 0 && i < this.getNopat().size()) {
-                this.getNopat().get(i).heita();
-            }
-        }
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.nimi);
         return hash;
     }
 
@@ -80,19 +56,13 @@ public class Pelaaja {
         }
         return true;
     }
-
-
     
+
+
     @Override
     public String toString() {
-        StringBuilder build = new StringBuilder(this.getNimi());
-        build.append(": ");
-        for (int i : this.nykyisetPisteluvut()) {
-            build.append(i);
-            build.append(" ");
-        }
-        build.delete(build.length() - 1, build.length());
-        return build.toString();
+        return this.getNimi();
     }
+
 
 }

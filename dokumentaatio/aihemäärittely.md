@@ -3,6 +3,7 @@ __Aihe:__ yatzy. Toteutetaan yatzy-peli, jossa mahdollisuus pelata ihmisiä vast
 __Käyttäjät:__ pelaaja(t)
 
 ###Käyttäjien toiminnot:
+- Heitettävien noppien valitseminen
 - Noppien heittäminen
 - Tuloksen kirjaaminen
 

@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import ohha.yavatzy.KierrosNimet;
+
 /**
  * Luokka tallentaa monen pelaajan pisteet monelta kierrokselta. Tietää myös
  * yatzyn bonus-säännön ja osaa laskea pelaajan kokonaispisteet.
@@ -129,7 +131,7 @@ public class Pistelista {
         for (Pelaaja pelaaja : this.getPistelista().keySet()) {
             builder.append(pelaaja);
             builder.append(": \n");
-            for (String kierros : this.getPistelista().get(pelaaja).keySet()) {
+            for (String kierros : KierrosNimet.kierrosNimet()) {
                 builder.append(kierros);
                 builder.append(": ");
                 builder.append(this.getPistelista().get(pelaaja).get(kierros));

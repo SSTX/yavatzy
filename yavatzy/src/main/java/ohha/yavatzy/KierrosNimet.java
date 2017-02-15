@@ -5,6 +5,8 @@
  */
 package ohha.yavatzy;
 
+import java.util.Arrays;
+
 /**
  * Luokka joka säilöö yatzy-kierrosten nimet.
  * @author ttiira
@@ -35,5 +37,9 @@ public class KierrosNimet {
      */
     public static String[] kierrosNimet() {
         return KIERROKSET;
+    }
+
+    public static String[] bonusKierrosNimet() {
+        return Arrays.copyOfRange(KIERROKSET, 0, 6);
     }
 }

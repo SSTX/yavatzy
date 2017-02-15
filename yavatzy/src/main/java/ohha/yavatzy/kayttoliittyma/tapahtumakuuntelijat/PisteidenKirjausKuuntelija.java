@@ -27,11 +27,9 @@ public class PisteidenKirjausKuuntelija implements ActionListener {
      * Luodaan tapahtumakuuntelija.
      *
      * @param peli peli, johon tämä kuuntelija liittyy
-     * @param heitaNopatNappi nappi, joka huolehtii noppien heittämisestä.
-     * @param kierrosValintaLaatikko valintalaatikko, joka kertoo kierrosnimen,
+     * @param heitaNopatNappi käyttöliittymän nappi, jonka painaminen heittää valitut nopat. Kun pisteet kirjataan, nappi muuttuu enabled-tilaan
+     * @param kierrosValintaLaatikko valintalaatikko, josta käyttäjä valitsee tallennettavan kierroksen nimen
      * @param pisteKirjausLaatikko tekstikenttä, jossa näytetään kertyneet pisteet
-     * johon pisteet tallennetaan Tarvitaan sen uudelleenaktivointiin, kun vuoro
-     * vaihtuu.
      */
     public PisteidenKirjausKuuntelija(Peli peli, JButton heitaNopatNappi, JComboBox kierrosValintaLaatikko,
             JTextArea pisteKirjausLaatikko) {

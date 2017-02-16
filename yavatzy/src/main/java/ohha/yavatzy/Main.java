@@ -20,27 +20,8 @@ public class Main {
      * @param args Ohjelmalle ulkopuolelta annetut argumentit
      */
     public static void main(String[] args) {
-//        Scanner scan = new Scanner(System.in);
-//        Peli peli = new Peli();
-//        peli.lisaaPelaaja("Jalmari");
-//        Pelaaja jalmari = peli.getPelaajat().get(0);
-//        int[] indeksit = {0, 1, 2, 3, 4};
-//        while (true) {
-//            System.out.println("Heitetään nopat:");
-//            peli.getNopat().stream().forEach(peli::valitseNoppa);
-//            peli.heitaNopat();
-//            System.out.println(peli.nykyisetPisteluvut());
-//            System.out.println("Mihin kierrokseen kirjataan? (esim. pari, kaksi paria, kolmoisluku, iso suora. Lopeta syötteellä 'lopeta')");
-//            String kierrosNimi = scan.nextLine();
-//            if (kierrosNimi.equals("lopeta")) {
-//                break;
-//            }
-//            peli.lisaaPisteet(kierrosNimi);
-//        }
-//        System.out.println("Tulostetaan pisteet:");
-//        System.out.println(peli.getPistelista().getPistelista().get(jalmari));
         Peli peli = new Peli();
-        peli.lisaaPelaaja("Jalmari");
+        //peli.lisaaPelaaja("Jalmari");
         Kayttoliittyma kayttis = new Kayttoliittyma(peli);
         SwingUtilities.invokeLater(kayttis);
     }

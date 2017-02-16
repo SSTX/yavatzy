@@ -83,12 +83,12 @@ public class Pistelista {
      * @param kierrosNimi pisteytetty kierros
      * @return pelaajan kierroksen pistemäärä
      */
-    public int pelaajanPisteetKierrokselta(Pelaaja pelaaja, String kierrosNimi) {
+    public Integer pelaajanPisteetKierrokselta(Pelaaja pelaaja, String kierrosNimi) {
         if (this.getPistelista().containsKey(pelaaja)
                 && this.getPistelista().get(pelaaja).containsKey(kierrosNimi)) {
             return this.getPistelista().get(pelaaja).get(kierrosNimi);
         }
-        return 0;
+        return null;
     }
 
     /**

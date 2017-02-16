@@ -59,8 +59,8 @@ public class PistelistaTest {
         lista.lisaaPelaaja(irmeli);
         lista.lisaaPisteet(irmeli, "kolmoset", 3);
         lista.lisaaPisteet(irmeli, "pari", 4);
-        assertEquals(3, lista.pelaajanPisteetKierrokselta(irmeli, "kolmoset"));
-        assertEquals(4, lista.pelaajanPisteetKierrokselta(irmeli, "pari"));
+        assertEquals(3, (long)lista.pelaajanPisteetKierrokselta(irmeli, "kolmoset"));
+        assertEquals(4, (long)lista.pelaajanPisteetKierrokselta(irmeli, "pari"));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class PistelistaTest {
         lista.lisaaPelaaja(irmeli);
         lista.lisaaPisteet(irmeli, "pari", 2);
         lista.lisaaPisteet(irmeli, "pari", 4);
-        assertEquals(2, lista.pelaajanPisteetKierrokselta(irmeli, "pari"));
+        assertEquals(2, (long)lista.pelaajanPisteetKierrokselta(irmeli, "pari"));
     }
 
     @Test

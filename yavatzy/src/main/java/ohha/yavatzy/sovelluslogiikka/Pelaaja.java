@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class Pelaaja {
 
     private String nimi;
+    private int id;
     /**
      * Luodaan pelaaja annetulla nimellä.
      * @param nimi pelaajan nimi

@@ -114,7 +114,7 @@ public class PeliTest {
         assertFalse(testi.getNopat() == null);
         assertTrue(testi.getNopat().size() > 0);
     }
-    
+
     @Test
     public void noppienPisteluvutEivatMuutuJosEiVoidaHeittaa() {
         int count = 0;
@@ -127,13 +127,33 @@ public class PeliTest {
             assertEquals(pisteluvut.get(i), peli.nykyisetPisteluvut().get(i));
         }
     }
-    
+
     @Test
     public void heitonJalkeenEiHeitettavaksiValittujaNoppia() {
         peli.valitseNoppa(peli.getNopat().get(0));
         peli.heitaNopat();
         assertTrue(peli.getValitutNopat().isEmpty());
     }
+
+    @Test
+    public void pisteidenLisaysVaihtaaVuorossaOlevaaPelaajaa() {
+        peli.lisaaPelaaja("Jalmari");
+        peli.lisaaPelaaja("Jokke");
+        Pelaaja p = peli.vuorossaOlevaPelaaja();
+        peli.lisaaPisteet("sattuma");
+        assertFalse(p.equals(peli.vuorossaOlevaPelaaja()));
+    }
+
+    @Test
+    public void pisteetLisataanJarjestyksessaJokaisellePelaajalle() {
+        peli.lisaaPelaaja("Jalmari");
+        peli.lisaaPelaaja("Jokke");
+        peli.lisaaPisteet("sattuma");
+        peli.lisaaPisteet("sattuma");
+        peli.getPelaajat().stream().forEach((pelaaja) -> assertEquals(20,
+               (long) peli.getPistelista().pelaajanPisteetKierrokselta(pelaaja, "sattuma")));
+    }
+
     @After
     public void tearDown() {
     }

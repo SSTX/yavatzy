@@ -118,7 +118,14 @@ public class Peli {
         if (!this.getPelaajat().isEmpty()) {
             this.vuoroNumero = (this.vuoroNumero + 1) % this.getPelaajat().size();
         }
+        if (this.vuoroNumero == 0) {
+            this.seuraavaKierros();
+        }
         this.heittojaJaljella = 3;
+    }
+    
+    private void seuraavaKierros() {
+        this.kierros++;
     }
 
     /**
@@ -147,12 +154,15 @@ public class Peli {
      *
      * @param nimi Lisättävän pelaajan nimi.
      */
-    public void lisaaPelaaja(String nimi) {
+    public boolean lisaaPelaaja(String nimi) {
         Pelaaja lisattava = new Pelaaja(nimi);
+        boolean onnistui = false;
         if (!this.getPelaajat().contains(lisattava)) {
             this.getPelaajat().add(lisattava);
+            onnistui = true;
         }
-        this.getPistelista().lisaaPelaaja(lisattava);
+        onnistui = this.getPistelista().lisaaPelaaja(lisattava);
+        return onnistui;
     }
 
     /**

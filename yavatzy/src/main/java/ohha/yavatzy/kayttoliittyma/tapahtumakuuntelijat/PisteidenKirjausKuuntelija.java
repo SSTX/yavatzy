@@ -43,7 +43,6 @@ public class PisteidenKirjausKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.heitaNopatNappi.setEnabled(true);
         this.peli.lisaaPisteet(this.kierrosValintaLaatikko.getSelectedItem().toString());
-        this.peli.seuraavaVuoro();
         this.peli.getValitutNopat().addAll(this.peli.getNopat());
         //heitetään noppia kerran, että saadaan edellisen pelaajan pisteluvut pois
         this.heitaNopatNappi.doClick();

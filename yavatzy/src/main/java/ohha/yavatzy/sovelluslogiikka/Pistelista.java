@@ -7,20 +7,18 @@ package ohha.yavatzy.sovelluslogiikka;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 import ohha.yavatzy.KierrosNimet;
 
 /**
- * Luokka tallentaa monen pelaajan pisteet monelta kierrokselta. Tietää myös
- * yatzyn bonus-säännön ja osaa laskea pelaajan kokonaispisteet.
+ * Luokka tallentaa monen pelaajan pisteet monelta kierrokselta,
+ * sekä pelaajan kokonaispistemäärän ja bonuksen.
  */
 public class Pistelista {
 
     private Map<Pelaaja, Map<String, Integer>> pistelista;
     private int bonusPisteet;
     private int bonusRaja;
-    private String[] bonusKierrokset;
 
     /**
      * Luodaan pistelista.
@@ -29,13 +27,6 @@ public class Pistelista {
         this.pistelista = new HashMap<>();
         this.bonusPisteet = 50;
         this.bonusRaja = 63;
-        this.bonusKierrokset = new String[]{"ykköset",
-            "kakkoset",
-            "kolmoset",
-            "neloset",
-            "vitoset",
-            "kutoset",
-        };
     }
 
     public Map<Pelaaja, Map<String, Integer>> getPistelista() {
@@ -71,6 +62,7 @@ public class Pistelista {
             if (this.bonus(pelaaja)) {
                 pelaajanPisteet.put("bonus", this.bonusPisteet);
             }
+            pelaajanPisteet.put("yhteensä", this.pelaajanKokonaisPisteet(pelaaja));
             return true;
         }
         return false;
@@ -91,55 +83,31 @@ public class Pistelista {
         return null;
     }
 
-    /**
-     * Palauttaa pelaajan senhetkiset kokonaispisteet.
-     *
-     * @param pelaaja pisteiden omistaja
-     * @return Pisteiden kokonaismäärä, bonus mukaanluettuna
-     */
-    public int pelaajanKokonaisPisteet(Pelaaja pelaaja) {
+    private int pelaajanKokonaisPisteet(Pelaaja pelaaja) {
         if (!this.getPistelista().containsKey(pelaaja)) {
             return 0;
         }
-        return this.getPistelista().get(pelaaja).values()
-                .stream().reduce(0, (a, b) -> a + b);
+        int summa = 0;
+        for (String kierros : KierrosNimet.kierrosNimet()) {
+            Integer pisteet = this.pelaajanPisteetKierrokselta(pelaaja, kierros);
+            if (pisteet != null) {
+                summa += pisteet;
+            }
+        }
+        return summa;
     }
-
-    /**
-     * Kertoo, onko tietty pelaaja saavuttanut bonuksen.
-     *
-     * @param pelaaja tarkasteltava pelaaja
-     * @return true, jos pelaaja on saavuttanut bonuksen, false muuten
-     */
-    public boolean bonus(Pelaaja pelaaja) {
+    
+    private boolean bonus(Pelaaja pelaaja) {
         if (!this.getPistelista().containsKey(pelaaja)) {
             return false;
         }
 
         int huomioitavatPisteet = 0;
-        for (String kierros : this.bonusKierrokset) {
+        for (String kierros : KierrosNimet.bonusKierrosNimet()) {
             if (this.getPistelista().get(pelaaja).containsKey(kierros)) {
                 huomioitavatPisteet += this.getPistelista().get(pelaaja).get(kierros);
             }
         }
         return huomioitavatPisteet >= this.bonusRaja;
-    }
-    
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (Pelaaja pelaaja : this.getPistelista().keySet()) {
-            builder.append(pelaaja);
-            builder.append(": \n");
-            for (String kierros : KierrosNimet.kierrosNimet()) {
-                builder.append(kierros);
-                builder.append(": ");
-                builder.append(this.getPistelista().get(pelaaja).get(kierros));
-                builder.append("\n");
-            }
-            builder.append("Yhteensä: ");
-            builder.append(this.pelaajanKokonaisPisteet(pelaaja));
-        }
-        return builder.toString();
     }
 }

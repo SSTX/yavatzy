@@ -66,16 +66,8 @@ public class Peli {
         return pistelista;
     }
 
-    public int getKierros() {
-        return kierros;
-    }
-
     public int getVuoroNumero() {
         return vuoroNumero;
-    }
-
-    public Pisteytyssaannot getSaannot() {
-        return saannot;
     }
 
     public List<Noppa> getValitutNopat() {
@@ -89,7 +81,7 @@ public class Peli {
      * muuten.
      */
     public boolean voidaanHeittaa() {
-        return this.getHeittojaJaljella() > 0;
+        return this.heittojaJaljella > 0 && !this.valitutNopat.isEmpty();
     }
 
     /**
@@ -115,6 +107,7 @@ public class Peli {
      * heittoa.
      */
     public void seuraavaVuoro() {
+        this.heitaNopat();
         if (!this.getPelaajat().isEmpty()) {
             this.vuoroNumero = (this.vuoroNumero + 1) % this.getPelaajat().size();
         }
@@ -122,6 +115,7 @@ public class Peli {
             this.seuraavaKierros();
         }
         this.heittojaJaljella = 3;
+        this.heitaNopat();
     }
     
     private void seuraavaKierros() {
@@ -134,7 +128,7 @@ public class Peli {
      * @return true, jos peli on päättynyt false, muuten
      */
     public boolean peliLoppu() {
-        return this.getKierros() > this.kierroksienKokonaismaara;
+        return this.kierros > this.kierroksienKokonaismaara;
     }
 
     /**
@@ -172,7 +166,7 @@ public class Peli {
      * @return true, jos pisteiden lisääminen onnistui false, muuten
      */
     public boolean lisaaPisteet(String kierrosNimi) {
-        int pisteet = this.getSaannot()
+        int pisteet = this.saannot
                 .pisteyta(kierrosNimi, this.getNopat());
         boolean onnistui = this.getPistelista()
                 .lisaaPisteet(this.vuorossaOlevaPelaaja(), kierrosNimi, pisteet);
@@ -210,9 +204,5 @@ public class Peli {
 
     public List<Noppa> getNopat() {
         return nopat;
-    }
-
-    public int getHeittojaJaljella() {
-        return heittojaJaljella;
     }
 }

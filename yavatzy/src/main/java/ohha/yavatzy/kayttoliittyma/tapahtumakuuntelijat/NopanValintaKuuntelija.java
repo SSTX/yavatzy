@@ -2,16 +2,15 @@ package ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JToggleButton;
-import ohha.yavatzy.sovelluslogiikka.Noppa;
+import ohha.yavatzy.kayttoliittyma.Paivitettava;
+import ohha.yavatzy.kayttoliittyma.napit.NoppaNappi;
 
 import ohha.yavatzy.sovelluslogiikka.Peli;
 
 public class NopanValintaKuuntelija implements ActionListener {
 
     private Peli peli;
-    private JToggleButton noppaNappi;
-    private Noppa noppa;
+    private Paivitettava kayttoliittyma;
 
     /**
      * Luodaan tapahtumakuuntelija.
@@ -19,18 +18,19 @@ public class NopanValintaKuuntelija implements ActionListener {
      * @param noppaNappi nappi, johon tämä kuuntelija liittyy
      * @param noppa noppa, jota tämä kuuntelija käsittelee
      */
-    public NopanValintaKuuntelija(Peli peli, JToggleButton noppaNappi, Noppa noppa) {
+    public NopanValintaKuuntelija(Peli peli, Paivitettava kayttoliittyma) {
         this.peli = peli;
-        this.noppaNappi = noppaNappi;
-        this.noppa = noppa;
+        this.kayttoliittyma = kayttoliittyma;
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (!this.noppaNappi.isSelected()) {
-            this.peli.poistaNopanValinta(this.noppa);
+        NoppaNappi noppaNappi = (NoppaNappi) ae.getSource();
+        if (!noppaNappi.isSelected()) {
+            this.peli.poistaNopanValinta(noppaNappi.getNoppa());
         } else {
-            this.peli.valitseNoppa(this.noppa);
+            this.peli.valitseNoppa(noppaNappi.getNoppa());
         }
+        this.kayttoliittyma.paivita();
     }
 }

@@ -38,12 +38,6 @@ public class PeliTest {
     }
 
     @Test
-    public void lisaaPelaajaLaittaaPelaajalleOikeanMaaranNoppia() {
-        peli.lisaaPelaaja("Jalmari");
-        assertEquals(5, peli.getNopat().size());
-    }
-
-    @Test
     public void lisaaPelaajaKasvattaaPelaajienMaaraaYhdella() {
         peli.lisaaPelaaja("Pekka");
         assertEquals(1, peli.getPelaajat().size());

@@ -23,13 +23,17 @@ public class PisteidenKirjausKuuntelija implements ActionListener {
     private JButton heitaNopatNappi;
     private JComboBox kierrosValintaLaatikko;
     private JTextArea pisteKirjausLaatikko;
+
     /**
      * Luodaan tapahtumakuuntelija.
      *
      * @param peli peli, johon tämä kuuntelija liittyy
-     * @param heitaNopatNappi käyttöliittymän nappi, jonka painaminen heittää valitut nopat. Kun pisteet kirjataan, nappi muuttuu enabled-tilaan
-     * @param kierrosValintaLaatikko valintalaatikko, josta käyttäjä valitsee tallennettavan kierroksen nimen
-     * @param pisteKirjausLaatikko tekstikenttä, jossa näytetään kertyneet pisteet
+     * @param heitaNopatNappi käyttöliittymän nappi, jonka painaminen heittää
+     * valitut nopat. Kun pisteet kirjataan, nappi muuttuu enabled-tilaan
+     * @param kierrosValintaLaatikko valintalaatikko, josta käyttäjä valitsee
+     * tallennettavan kierroksen nimen
+     * @param pisteKirjausLaatikko tekstikenttä, jossa näytetään kertyneet
+     * pisteet
      */
     public PisteidenKirjausKuuntelija(Peli peli, JButton heitaNopatNappi, JComboBox kierrosValintaLaatikko,
             JTextArea pisteKirjausLaatikko) {
@@ -43,8 +47,8 @@ public class PisteidenKirjausKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.heitaNopatNappi.setEnabled(true);
         this.peli.lisaaPisteet(this.kierrosValintaLaatikko.getSelectedItem().toString());
+        //heitetään kaikkia noppia kerran, että saadaan edellisen pelaajan pisteluvut pois
         this.peli.getValitutNopat().addAll(this.peli.getNopat());
-        //heitetään noppia kerran, että saadaan edellisen pelaajan pisteluvut pois
         this.heitaNopatNappi.doClick();
         this.pisteKirjausLaatikko.setText(this.peli.getPistelista().toString());
     }

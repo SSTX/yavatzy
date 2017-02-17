@@ -20,6 +20,7 @@ public class KierrosNimet {
         "neloset",
         "vitoset",
         "kutoset",
+        "bonus",
         "pari",
         "kaksi paria",
         "kolmoisluku",
@@ -39,6 +40,10 @@ public class KierrosNimet {
         return KIERROKSET;
     }
 
+    /**
+     * Palauttaa bonuksen laskemiseen hyväksyttävien kierrosten nimet.
+     * @return bonuskierrosten nimet
+     */
     public static String[] bonusKierrosNimet() {
         return Arrays.copyOfRange(KIERROKSET, 0, 6);
     }

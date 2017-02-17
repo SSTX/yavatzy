@@ -1,39 +1,40 @@
 package ohha.yavatzy.kayttoliittyma;
 
+import ohha.yavatzy.kayttoliittyma.napit.PisteListaNappi;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.WindowConstants;
 
 import ohha.yavatzy.sovelluslogiikka.Noppa;
 import ohha.yavatzy.sovelluslogiikka.Peli;
 import ohha.yavatzy.KierrosNimet;
-import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.PisteidenKirjausKuuntelija;
-import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanValintaKuuntelija;
+import ohha.yavatzy.kayttoliittyma.napit.NopanHeittoNappi;
+import ohha.yavatzy.kayttoliittyma.napit.NoppaNappi;
+import ohha.yavatzy.kayttoliittyma.napit.PelinAloitusNappi;
 import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanHeittoKuuntelija;
+import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanValintaKuuntelija;
 import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.PelaajanLisaysKuuntelija;
+import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.PelinAloitusKuuntelija;
+import ohha.yavatzy.sovelluslogiikka.Pelaaja;
 
 /**
  * Graafinen käyttöliittymä yatzy-pelille. Luo ikkunan ja käyttöliittymän
  * komponentit.
  */
-public class Kayttoliittyma implements Runnable {
+public class Kayttoliittyma implements Runnable, Paivitettava {
 
     private JFrame frame;
     private Peli peli;
-    private int pelaajienMaara;
+    private int pelaajienMaksimiMaara;
+    private List<Paivitettava> paivitettavat;
 
     /**
      * Konstruoi Kayttoliittyma-olion.
@@ -42,11 +43,31 @@ public class Kayttoliittyma implements Runnable {
      */
     public Kayttoliittyma(Peli peli) {
         this.peli = peli;
-        this.pelaajienMaara = 2;
+        this.pelaajienMaksimiMaara = 4;
+        this.paivitettavat = new ArrayList<>();
+    }
+
+    @Override
+    public void paivita() {
+        for (Paivitettava p : this.paivitettavat) {
+            p.paivita();
+        }
     }
 
     @Override
     public void run() {
+        this.frame = new JFrame("Yavatzy");
+        this.frame.setPreferredSize(new Dimension(480, 360));
+        this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.luoPelaajienLisaysRuutu(frame.getContentPane());
+        this.frame.pack();
+        this.frame.setVisible(true);
+    }
+
+    /**
+     * Avaa varsinaisen peli-ikkunan.
+     */
+    public void aloitaPeli() {
         this.frame = new JFrame("Yavatzy");
         this.frame.setPreferredSize(new Dimension(1280, 720));
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -55,70 +76,43 @@ public class Kayttoliittyma implements Runnable {
         this.frame.setVisible(true);
     }
 
-    public Peli getPeli() {
-        return this.peli;
+    private void luoPelaajienLisaysRuutu(Container container) {
+        JPanel paneeli = new JPanel();
+        paneeli.setPreferredSize(new Dimension(480, 360));
+        paneeli.setLayout(new GridBagLayout());
+        GridBagConstraints rajat = new GridBagConstraints();
+        rajat.fill = GridBagConstraints.BOTH;
+        for (int i = 0; i < this.pelaajienMaksimiMaara; i++) {
+            rajat.gridy = i;
+            JLabel pelaajaNumero = new JLabel("Pelaaja " + (i + 1) + ": ");
+            paneeli.add(pelaajaNumero, rajat);
+
+        }
+        rajat.gridx = 1;
+        for (int i = 0; i < this.pelaajienMaksimiMaara; i++) {
+            rajat.gridy = i;
+            JTextField nimiKentta = new JTextField(20);
+            nimiKentta.addActionListener(new PelaajanLisaysKuuntelija(this.peli, this));
+            paneeli.add(nimiKentta, rajat);
+        }
+        PelinAloitusNappi pelinAloitusNappi = new PelinAloitusNappi("Aloita peli", this.peli);
+        pelinAloitusNappi.addActionListener(new PelinAloitusKuuntelija(this));
+        this.paivitettavat.add(pelinAloitusNappi);
+        paneeli.add(pelinAloitusNappi);
+        this.paivita();
+        container.add(paneeli);
     }
 
     private void luoKomponentit(Container container) {
         container.setLayout(new GridBagLayout());
-        this.luoPisteLista();
-        this.luoNopanHeittoPaneeli();
+        JPanel pistelista = this.luoPisteLista();
+        JPanel nopanHeittoPaneeli = this.luoNopanHeittoPaneeli();
+        container.add(pistelista);
+        container.add(nopanHeittoPaneeli);
+        this.paivita();
     }
 
-    private GridBagConstraints luoNoppaNappiRajat() {
-        GridBagConstraints c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.PAGE_START;
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        c.gridy = 0;
-        return c;
-    }
-
-    private GridBagConstraints luoToisenRivinRajat() {
-        GridBagConstraints c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.PAGE_START;
-        c.gridheight = 1;
-        c.gridwidth = 3;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridy = 1;
-        return c;
-    }
-
-    private GridBagConstraints luoPisteListausLaatikonRajat() {
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridy = 2;
-        c.gridwidth = 6;
-        c.gridheight = 6;
-        c.ipady = 50;
-        c.fill = GridBagConstraints.BOTH;
-        return c;
-    }
-
-    private List<JToggleButton> luoNoppaNapit(Container container) {
-        List<JToggleButton> noppaNapit = new ArrayList<>();
-        for (Noppa noppa : this.getPeli().getNopat()) {
-            JToggleButton noppaNappi = new JToggleButton(noppa.toString());
-            noppaNappi.addActionListener(new NopanValintaKuuntelija(this.peli, noppaNappi, noppa));
-            noppaNapit.add(noppaNappi);
-        }
-        return noppaNapit;
-    }
-
-    private JButton luoHeitaNopatNappi(Container container, List<JToggleButton> noppaNapit) {
-        JButton heitaNopatNappi = new JButton("Heitä nopat");
-        heitaNopatNappi.addActionListener(new NopanHeittoKuuntelija(this.peli, heitaNopatNappi, noppaNapit));
-        return heitaNopatNappi;
-    }
-
-    private JButton luoKirjaaPisteetNappi(JButton heitaNopatNappi,
-            JComboBox kierrosValintaLaatikko, JTextArea pisteListausLaatikko) {
-        JButton kirjaaPisteetNappi = new JButton("Kirjaa pisteet");
-        kirjaaPisteetNappi.addActionListener(new PisteidenKirjausKuuntelija(this.peli,
-                heitaNopatNappi, kierrosValintaLaatikko, pisteListausLaatikko));
-        return kirjaaPisteetNappi;
-    }
-
-    private void luoPisteLista() {
+    private JPanel luoPisteLista() {
         JPanel paneeli = new JPanel();
         paneeli.setPreferredSize(new Dimension(800, 400));
         paneeli.setLayout(new GridBagLayout());
@@ -134,43 +128,48 @@ public class Kayttoliittyma implements Runnable {
         }
         paneeli.add(new JLabel("Yhteensä"), pisteListaRajat);
         //pelaajien nimet yläriviin
-        for (int i = 0; i < this.pelaajienMaara; i++) {
-            pisteListaRajat.gridy = 0;
+        pisteListaRajat.gridy = 0;
+        for (int i = 0; i < this.peli.getPelaajat().size(); i++) {
             pisteListaRajat.gridx = i + 1;
-            JTextField pelaajaNimi = new JTextField("", 20);
-            pelaajaNimi.addActionListener(new PelaajanLisaysKuuntelija(pelaajaNimi, this.peli));
-            paneeli.add(pelaajaNimi, pisteListaRajat);
+            JLabel nimiLabel = new JLabel(this.peli.getPelaajat().get(i).getNimi());
+            paneeli.add(nimiLabel, pisteListaRajat);
         }
-        //pistetaulukko
-        for (int j = 1; j <= this.pelaajienMaara; j++) {
+        //pistetaulukko väliin
+        for (int j = 1; j <= this.peli.getPelaajat().size(); j++) {
+            Pelaaja pelaaja = this.peli.getPelaajat().get(j - 1);
             pisteListaRajat.gridx = j;
+            pisteListaRajat.gridy = 1;
             for (int i = 0; i < KierrosNimet.kierrosNimet().length; i++) {
-                pisteListaRajat.gridy = i + 1;
-                PisteListaNappi nappi = new PisteListaNappi("", KierrosNimet.kierrosNimet()[i], j-1);
+                PisteListaNappi nappi = new PisteListaNappi("", KierrosNimet.kierrosNimet()[i], pelaaja, this.peli);
                 paneeli.add(nappi, pisteListaRajat);
+                this.paivitettavat.add(nappi);
+                pisteListaRajat.gridy++;
             }
+            PisteListaNappi yht = new PisteListaNappi("", "yhteensä", pelaaja, this.peli);
+            yht.setEnabled(false);
+            this.paivitettavat.add(yht);
+            paneeli.add(yht, pisteListaRajat);
         }
-        frame.getContentPane().add(paneeli);
+        return paneeli;
     }
 
-    private void luoNopanHeittoPaneeli() {
+    private JPanel luoNopanHeittoPaneeli() {
         JPanel paneeli = new JPanel();
-        List<JToggleButton> noppaNapit = this.luoNoppaNapit(paneeli);
-        JButton heitaNopatNappi = this.luoHeitaNopatNappi(paneeli, noppaNapit);
-        JComboBox kierrosValintaLaatikko = new JComboBox(KierrosNimet.kierrosNimet());
-        JTextArea pisteListausLaatikko = new JTextArea();
-        JButton kirjaaPisteetNappi = this.luoKirjaaPisteetNappi(heitaNopatNappi, kierrosValintaLaatikko, pisteListausLaatikko);
-        GridBagConstraints noppaNappiRajat = this.luoNoppaNappiRajat();
-        GridBagConstraints toisenRivinRajat = this.luoToisenRivinRajat();
-        GridBagConstraints pisteListausLaatikonRajat = this.luoPisteListausLaatikonRajat();
-
-        noppaNapit.stream().forEach((nappi) -> paneeli.add(nappi, noppaNappiRajat));
-        paneeli.add(heitaNopatNappi);
-        paneeli.add(kierrosValintaLaatikko, toisenRivinRajat);
-        paneeli.add(kirjaaPisteetNappi, toisenRivinRajat);
-        paneeli.add(pisteListausLaatikko, pisteListausLaatikonRajat);
-
-        heitaNopatNappi.doClick();
-        frame.getContentPane().add(paneeli);
+        GridBagConstraints rajat = new GridBagConstraints();
+        rajat.fill = GridBagConstraints.HORIZONTAL;
+        //noppia kuvaavat napit
+        for (Noppa noppa : this.peli.getNopat()) {
+            NoppaNappi nappi = new NoppaNappi("", noppa, this.peli);
+            this.paivitettavat.add(nappi);
+            nappi.addActionListener(new NopanValintaKuuntelija(this.peli, this));
+            paneeli.add(nappi, rajat);
+            rajat.gridx++;
+        }
+        //valitut nopat heittävä nappi
+        NopanHeittoNappi nopanHeittoNappi = new NopanHeittoNappi("Heitä nopat", this.peli);
+        nopanHeittoNappi.addActionListener(new NopanHeittoKuuntelija(this.peli, this));
+        this.paivitettavat.add(nopanHeittoNappi);
+        paneeli.add(nopanHeittoNappi, rajat);
+        return paneeli;
     }
 }

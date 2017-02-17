@@ -8,6 +8,7 @@ package ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
+import ohha.yavatzy.kayttoliittyma.Paivitettava;
 import ohha.yavatzy.sovelluslogiikka.Peli;
 
 /**
@@ -16,19 +17,19 @@ import ohha.yavatzy.sovelluslogiikka.Peli;
  */
 public class PelaajanLisaysKuuntelija implements ActionListener {
 
-    private JTextField nimiKentta;
     private Peli peli;
-
-    public PelaajanLisaysKuuntelija(JTextField nimiKentta, Peli peli) {
-        this.nimiKentta = nimiKentta;
+    private Paivitettava kayttoliittyma;
+    
+    public PelaajanLisaysKuuntelija(Peli peli, Paivitettava kayttoliittyma) {
         this.peli = peli;
+        this.kayttoliittyma = kayttoliittyma;
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (this.peli.getKierros() == 1 
-                && this.peli.lisaaPelaaja(this.nimiKentta.getText())) {
-            this.nimiKentta.setEditable(false);
-        }
+    public void actionPerformed(ActionEvent ae) {
+        JTextField nimiKentta = (JTextField)ae.getSource();
+        boolean onnistui = this.peli.lisaaPelaaja(nimiKentta.getText());
+        nimiKentta.setEditable(!onnistui);
+        kayttoliittyma.paivita();
     }
 }

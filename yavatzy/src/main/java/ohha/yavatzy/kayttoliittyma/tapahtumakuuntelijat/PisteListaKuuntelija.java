@@ -12,7 +12,7 @@ import ohha.yavatzy.kayttoliittyma.napit.PisteListaNappi;
 import ohha.yavatzy.sovelluslogiikka.Peli;
 
 /**
- *
+ * ActionListener-rajapinnan toteuttava luokka, jonka vastuulla on päivittää pistetaulukkoa käyttöliittymässä.
  * @author ttiira
  */
 public class PisteListaKuuntelija implements ActionListener {
@@ -20,6 +20,11 @@ public class PisteListaKuuntelija implements ActionListener {
     private Peli peli;
     private Paivitettava kayttoliittyma;
     
+    /**
+     * Luodaan tapahtumakuuntelija.
+     * @param peli peli, johon tämä luokka liittyy
+     * @param kayttoliittyma käyttöliittymä, jonka tapahtumia tämä luokka kuuntelee
+     */
     public PisteListaKuuntelija(Peli peli, Paivitettava kayttoliittyma) {
         this.peli = peli;
         this.kayttoliittyma = kayttoliittyma;
@@ -27,7 +32,7 @@ public class PisteListaKuuntelija implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        PisteListaNappi laukaisija = (PisteListaNappi)ae.getSource();
+        PisteListaNappi laukaisija = (PisteListaNappi) ae.getSource();
         laukaisija.tayta();
         this.peli.lisaaPisteet(laukaisija.getKierros());
         this.kayttoliittyma.paivita();

@@ -13,10 +13,10 @@ import ohha.yavatzy.sovelluslogiikka.Peli;
  * Jatkettu JButton, joka tietää mihin yatzy-peliin se kuuluu.
  * @author ttiira
  */
-public class PelinAloitusNappi extends JButton implements Paivitettava{
+public class PelinAloitusNappi extends JButton implements Paivitettava {
     private Peli peli;
     /**
-     * Luo PelinAloitusNappi-olion
+     * Luo PelinAloitusNappi-olion.
      * @param nimi napin nimi, annetaan JButtonin konstruktorille
      * @param peli peli, jonka tämän napin painaminen aloittaa
      */

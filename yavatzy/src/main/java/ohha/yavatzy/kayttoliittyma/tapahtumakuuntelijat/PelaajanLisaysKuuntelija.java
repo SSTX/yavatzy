@@ -12,7 +12,7 @@ import ohha.yavatzy.kayttoliittyma.Paivitettava;
 import ohha.yavatzy.sovelluslogiikka.Peli;
 
 /**
- *
+ * ActionListener-rajapinnan toteuttava luokka, jonka vastuulla on lisätä peli-olioon pelaajia.
  * @author ttiira
  */
 public class PelaajanLisaysKuuntelija implements ActionListener {
@@ -20,6 +20,11 @@ public class PelaajanLisaysKuuntelija implements ActionListener {
     private Peli peli;
     private Paivitettava kayttoliittyma;
     
+    /**
+     * Luodaan tapahtumakuuntelija.
+     * @param peli peli-olio, johon tämä luokka lisää pelaajia
+     * @param kayttoliittyma käyttöliittymä, jonka tapahtumia tämä luokka kuuntelee
+     */
     public PelaajanLisaysKuuntelija(Peli peli, Paivitettava kayttoliittyma) {
         this.peli = peli;
         this.kayttoliittyma = kayttoliittyma;
@@ -27,7 +32,7 @@ public class PelaajanLisaysKuuntelija implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        JTextField nimiKentta = (JTextField)ae.getSource();
+        JTextField nimiKentta = (JTextField) ae.getSource();
         boolean onnistui = this.peli.lisaaPelaaja(nimiKentta.getText());
         nimiKentta.setEditable(!onnistui);
         kayttoliittyma.paivita();

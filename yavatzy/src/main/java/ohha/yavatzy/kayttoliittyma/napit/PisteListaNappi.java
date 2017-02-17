@@ -12,7 +12,7 @@ import ohha.yavatzy.sovelluslogiikka.Peli;
 import ohha.yavatzy.sovelluslogiikka.Pisteytyssaannot;
 
 /**
- * Lisätty JButton, joka tietää, mikä yatzy-kierros ja pelaaja siihen liittyy
+ * Lisätty JButton, joka tietää, mikä yatzy-kierros ja pelaaja siihen liittyy. Tietää myös, onko siihen tallennettu jonkin kierroksen pistemäärä.
  *
  * @author ttiira
  */
@@ -25,7 +25,7 @@ public class PisteListaNappi extends JButton implements Paivitettava {
     private boolean taytetty;
 
     /**
-     * Luo PisteListaNappi-olion
+     * Luo PisteListaNappi-olion.
      * @param nimi napin nimi, annetaan yläluokan konstruktorille
      * @param kierros yatzy-kierros, johon tämä nappi liittyy
      * @param pelaaja pelaaja, johon tämä nappi liittyy
@@ -43,13 +43,12 @@ public class PisteListaNappi extends JButton implements Paivitettava {
     @Override
     public void paivita() {
         Integer pisteet = this.peli.getPistelista().pelaajanPisteetKierrokselta(pelaaja, kierros);
-        this.setEnabled(this.pelaaja.equals(this.peli.vuorossaOlevaPelaaja()));
-        if (this.isEnabled()) {
-            this.setEnabled(taytetty);
+        if (pisteet == null) {
+            this.setText(" ");
+        } else {
+            this.setText(Integer.toString(pisteet));
         }
-        if (this.isEnabled()) {
-            this.setText(Integer.toString(this.saannot.pisteyta(kierros, this.peli.getNopat())));
-        }
+        this.setEnabled(!taytetty && this.pelaaja.equals(this.peli.vuorossaOlevaPelaaja()));
     }
 
     public String getKierros() {
@@ -61,7 +60,7 @@ public class PisteListaNappi extends JButton implements Paivitettava {
     }
 
     /**
-     * Tämän jälkeen napin tekstiä ei voi vaihtaa
+     * Asettaa napin tilaksi täytetty. Tämän jälkeen nappia ei voi painaa.
      */
     public void tayta() {
         this.taytetty = true;

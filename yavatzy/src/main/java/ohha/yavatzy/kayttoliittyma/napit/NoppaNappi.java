@@ -19,7 +19,7 @@ public class NoppaNappi extends JToggleButton implements Paivitettava {
     private Peli peli;
     
     /**
-     * Luo NoppaNappi-olion
+     * Luo NoppaNappi-olion.
      * @param nimi Napin nimi, annetaan JToggleButtonin konstruktorille
      * @param noppa Nappiin liittyvä noppa-olio
      * @param peli Peliolio, johon nappi liittyy

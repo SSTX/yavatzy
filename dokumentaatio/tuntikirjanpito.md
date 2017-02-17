@@ -16,3 +16,5 @@ Päivä | Tunnit | Kuvaus
 8.2.2017 | 2h | Käyttöliittymän ohjelmointia, pisteytyssääntöjen ja testien refaktorointia
 10.2.2017 | 11h | Käyttöliittymän ohjelmointia, refaktorointia, testejä, javadocin kirjoittamista
 15.2.2017 | 1h | käyttöliittymän suunnittelua ja ohjelmointia
+16.2.2017 | 5h | käyttöliittymän ohjelmointia
+17.2.2017 | 7h | käyttöliittymän ohjelmointia, aihemäärittelyn ja luokkakaavion päivitus, sekvenssikaaviot, 5. viikon deadline

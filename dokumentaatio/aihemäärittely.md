@@ -3,8 +3,11 @@ __Aihe:__ yatzy. Toteutetaan yatzy-peli, jossa mahdollisuus pelata ihmisiä vast
 __Käyttäjät:__ pelaaja(t)
 
 ###Käyttäjien toiminnot:
+- Pelaajanimimerkin lisääminen
 - Heitettävien noppien valitseminen
 - Noppien heittäminen
 - Tuloksen kirjaaminen
 
 ![Luokkakaavio](kaavio.png)
+![Sekvenssikaavio: Pelaajan lisäys](sekvenssi_pelaajan_lisäys.png)
+![Sekvenssikaavio: Nopan valinta](sekvenssi_nopan_valinta.png)

@@ -58,6 +58,10 @@ public class Peli {
         this(null);
     }
 
+    public List<Noppa> getNopat() {
+        return nopat;
+    }
+
     public List<Pelaaja> getPelaajat() {
         return pelaajat;
     }
@@ -74,15 +78,6 @@ public class Peli {
         return this.valitutNopat;
     }
 
-    /**
-     * Kertoo, voiko vuorossa oleva pelaaja heittää vielä noppia.
-     *
-     * @return true, jos yatzyn säännöt sallivat noppien heittämisen. false,
-     * muuten.
-     */
-    public boolean voidaanHeittaa() {
-        return this.heittojaJaljella > 0 && !this.valitutNopat.isEmpty();
-    }
 
     /**
      * Lisää nopan heitettäväksi merkittyjen listalle.
@@ -107,7 +102,6 @@ public class Peli {
      * heittoa.
      */
     public void seuraavaVuoro() {
-        this.heitaNopat();
         if (!this.getPelaajat().isEmpty()) {
             this.vuoroNumero = (this.vuoroNumero + 1) % this.getPelaajat().size();
         }
@@ -117,7 +111,7 @@ public class Peli {
         this.heittojaJaljella = 3;
         this.heitaNopat();
     }
-    
+
     private void seuraavaKierros() {
         this.kierros++;
     }
@@ -145,8 +139,8 @@ public class Peli {
 
     /**
      * Lisää pelaajan peliin.
-     *
      * @param nimi Lisättävän pelaajan nimi.
+     * @return true, jos pelaajan lisäys onnistui. false muuten.
      */
     public boolean lisaaPelaaja(String nimi) {
         Pelaaja lisattava = new Pelaaja(nimi);
@@ -167,9 +161,9 @@ public class Peli {
      */
     public boolean lisaaPisteet(String kierrosNimi) {
         int pisteet = this.saannot
-                .pisteyta(kierrosNimi, this.getNopat());
+            .pisteyta(kierrosNimi, this.getNopat());
         boolean onnistui = this.getPistelista()
-                .lisaaPisteet(this.vuorossaOlevaPelaaja(), kierrosNimi, pisteet);
+            .lisaaPisteet(this.vuorossaOlevaPelaaja(), kierrosNimi, pisteet);
         if (onnistui) {
             this.seuraavaVuoro();
         }
@@ -183,14 +177,14 @@ public class Peli {
      */
     public List<Integer> nykyisetPisteluvut() {
         return this.getNopat()
-                .stream()
-                .map(Noppa::getPisteluku)
-                .collect(Collectors.toList());
+            .stream()
+            .map(Noppa::getPisteluku)
+            .collect(Collectors.toList());
     }
 
     /**
      * Heitetään ne nopat, jotka oliomuuttuja määrää heitettäviksi. Vähennetään
-     * vuoron jäljellä olevien heittojen määrää yhdellä.
+     * vuoron jäljellä olevien heittojen määrää yhdellä. Poistetaan kaikkien noppien valinta.
      */
     public void heitaNopat() {
         if (this.voidaanHeittaa()) {
@@ -202,7 +196,13 @@ public class Peli {
         }
     }
 
-    public List<Noppa> getNopat() {
-        return nopat;
+    /**
+     * Kertoo, voiko vuorossa oleva pelaaja heittää vielä noppia.
+     *
+     * @return true, jos yatzyn säännöt sallivat noppien heittämisen. false,
+     * muuten.
+     */
+    public boolean voidaanHeittaa() {
+        return this.heittojaJaljella > 0 && !this.valitutNopat.isEmpty();
     }
 }

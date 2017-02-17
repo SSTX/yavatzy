@@ -11,7 +11,7 @@ package ohha.yavatzy.kayttoliittyma;
  */
 public interface Paivitettava {
     /**
-     * Päivittää tilan
+     * Päivittää olion tilan.
      */
     public void paivita();
 }

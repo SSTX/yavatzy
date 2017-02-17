@@ -24,6 +24,7 @@ import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanValintaKuuntelija;
 import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.PelaajanLisaysKuuntelija;
 import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.PelinAloitusKuuntelija;
 import ohha.yavatzy.sovelluslogiikka.Pelaaja;
+import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.PisteListaKuuntelija;
 
 /**
  * Graafinen käyttöliittymä yatzy-pelille. Luo ikkunan ja käyttöliittymän
@@ -68,8 +69,10 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
      * Avaa varsinaisen peli-ikkunan.
      */
     public void aloitaPeli() {
+        this.frame.setVisible(false);
+        this.frame.dispose();
         this.frame = new JFrame("Yavatzy");
-        this.frame.setPreferredSize(new Dimension(1280, 720));
+        this.frame.setPreferredSize(new Dimension(1280, 1000));
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.luoKomponentit(frame.getContentPane());
         this.frame.pack();
@@ -86,7 +89,6 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
             rajat.gridy = i;
             JLabel pelaajaNumero = new JLabel("Pelaaja " + (i + 1) + ": ");
             paneeli.add(pelaajaNumero, rajat);
-
         }
         rajat.gridx = 1;
         for (int i = 0; i < this.pelaajienMaksimiMaara; i++) {
@@ -141,12 +143,14 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
             pisteListaRajat.gridy = 1;
             for (int i = 0; i < KierrosNimet.kierrosNimet().length; i++) {
                 PisteListaNappi nappi = new PisteListaNappi("", KierrosNimet.kierrosNimet()[i], pelaaja, this.peli);
+                nappi.addActionListener(new PisteListaKuuntelija(this.peli, this));
                 paneeli.add(nappi, pisteListaRajat);
                 this.paivitettavat.add(nappi);
                 pisteListaRajat.gridy++;
             }
             PisteListaNappi yht = new PisteListaNappi("", "yhteensä", pelaaja, this.peli);
             yht.setEnabled(false);
+            yht.tayta();
             this.paivitettavat.add(yht);
             paneeli.add(yht, pisteListaRajat);
         }

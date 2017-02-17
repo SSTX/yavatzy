@@ -7,7 +7,10 @@ import javax.swing.JButton;
 import ohha.yavatzy.kayttoliittyma.Paivitettava;
 
 import ohha.yavatzy.sovelluslogiikka.Peli;
-
+/**
+ * ActionListener-rajapinnan toteuttava luokka, jonka vastuulla on heittää peli-olion noppia.
+ * @author ttiira
+ */ 
 public class NopanHeittoKuuntelija implements ActionListener {
 
     private Peli peli;
@@ -17,9 +20,7 @@ public class NopanHeittoKuuntelija implements ActionListener {
      * Luodaan tapahtumakuuntelija.
      *
      * @param peli peli, johon heitettävät nopat kuuluvat
-     * @param heitaNopatNappi nappi, johon tämä kuuntelija liittyy
-     * @param nopanValintaNapit heitettävien noppien valintaan käytettävät
-     * napit, kun nopat heitetään, poistetaan valinta kaikista
+     * @param kayttoliittyma käyttöliittymä, jonka osa tämä nappi on.
      */
     public NopanHeittoKuuntelija(Peli peli, Paivitettava kayttoliittyma) {
         this.peli = peli;

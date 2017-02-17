@@ -3,5 +3,5 @@ Yatzy-peli javalla toteutettuna. Mahdollisuus pelata ihmisiä tai tekoälyä vas
 ##Dokumentaatio
 * [Aiheen kuvaus](dokumentaatio/aihemäärittely.md)
 * [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
-* [Pit-raportti](https://htmlpreview.github.io/?https://github.com/SSTX/yavatzy/blob/master/dokumentaatio/pit-reports/201702172054/index.html)
+* [Pit-raportti](https://htmlpreview.github.io/?https://github.com/SSTX/yavatzy/blob/master/dokumentaatio/pit-reports/201702172052/index.html)
 * [Checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/SSTX/yavatzy/blob/master/dokumentaatio/site/checkstyle.html)

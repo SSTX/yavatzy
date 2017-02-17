@@ -7,7 +7,10 @@ __Käyttäjät:__ pelaaja(t)
 - Heitettävien noppien valitseminen
 - Noppien heittäminen
 - Tuloksen kirjaaminen
-
+###Luokkakaavio
 ![Luokkakaavio](kaavio.png)
+###Sekvenssikaaviot
+#Pelaajan lisääminen
 ![Sekvenssikaavio: Pelaajan lisäys](sekvenssi_pelaajan_lisäys.png)
+#Nopan valinta
 ![Sekvenssikaavio: Nopan valinta](sekvenssi_nopan_valinta.png)

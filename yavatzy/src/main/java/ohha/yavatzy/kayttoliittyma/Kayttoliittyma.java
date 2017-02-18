@@ -54,7 +54,9 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
             p.paivita();
         }
     }
-
+    /**
+     * Avaa pelaajien lisäys -ruudun.
+     */
     @Override
     public void run() {
         this.frame = new JFrame("Yavatzy");
@@ -116,7 +118,7 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
 
     private JPanel luoPisteLista() {
         JPanel paneeli = new JPanel();
-        paneeli.setPreferredSize(new Dimension(800, 400));
+        paneeli.setPreferredSize(new Dimension(600, 800));
         paneeli.setLayout(new GridBagLayout());
         GridBagConstraints pisteListaRajat = new GridBagConstraints();
         pisteListaRajat.fill = GridBagConstraints.BOTH;

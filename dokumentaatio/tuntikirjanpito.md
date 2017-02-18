@@ -10,7 +10,7 @@ Päivä | Tunnit | Kuvaus
 1.2.2017 | 1.5h | logiikan ja testien ohjelmointia
 2.2.2017 | 1h | logiikkaa ja testejä
 3.2.2017 | 2.5h | logiikkaa, testejä, luokkakaavion päivitys
-4.2.2017 | 2h | Koodikatselmointi, git-säätöä
+4.2.2017 | 2h | Koodikatselmointi 1, git-säätöä
 6.2.2017 | 0.5h | Pisteytyssääntöjen ja testien refaktorointia
 7.2.2017 | 1h | Käyttöliittymän suunnitelua, toteutuksen aloitus
 8.2.2017 | 2h | Käyttöliittymän ohjelmointia, pisteytyssääntöjen ja testien refaktorointia
@@ -18,3 +18,4 @@ Päivä | Tunnit | Kuvaus
 15.2.2017 | 1h | käyttöliittymän suunnittelua ja ohjelmointia
 16.2.2017 | 5h | käyttöliittymän ohjelmointia
 17.2.2017 | 7h | käyttöliittymän ohjelmointia, aihemäärittelyn ja luokkakaavion päivitus, sekvenssikaaviot, 5. viikon deadline
+18.2.2017 | 3.5h | koodikatselmointi 2

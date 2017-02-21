@@ -151,8 +151,6 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
                 pisteListaRajat.gridy++;
             }
             PisteListaNappi yht = new PisteListaNappi("", "yhteensä", pelaaja, this.peli);
-            yht.setEnabled(false);
-            yht.tayta();
             this.paivitettavat.add(yht);
             paneeli.add(yht, pisteListaRajat);
         }

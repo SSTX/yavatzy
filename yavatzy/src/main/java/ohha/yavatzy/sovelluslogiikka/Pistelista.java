@@ -42,6 +42,8 @@ public class Pistelista {
     public boolean lisaaPelaaja(Pelaaja pelaaja) {
         if (!this.getPistelista().containsKey(pelaaja)) {
             this.getPistelista().put(pelaaja, new HashMap<>());
+            //alustetaan yhteispistemäärä
+            this.getPistelista().get(pelaaja).put("yhteensä", 0);
             return true;
         }
         return false;

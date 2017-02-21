@@ -41,7 +41,7 @@ public class Peli {
         this.pistelista = new Pistelista();
         this.saannot = new Pisteytyssaannot();
         this.valitutNopat = new ArrayList<>();
-        this.heittojaJaljella = 3;
+        this.heittojaJaljella = 2; // nopat alustetaan satunnaisiin lukuihin
         if (nopat == null) {
             nopat = new ArrayList<>();
             for (int i = 0; i < 5; i++) {
@@ -109,6 +109,7 @@ public class Peli {
             this.seuraavaKierros();
         }
         this.heittojaJaljella = 3;
+        this.valitutNopat = new ArrayList<>(this.nopat);
         this.heitaNopat();
     }
 

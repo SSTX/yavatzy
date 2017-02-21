@@ -35,6 +35,9 @@ public class PelaajanLisaysKuuntelija implements ActionListener {
         JTextField nimiKentta = (JTextField) ae.getSource();
         boolean onnistui = this.peli.lisaaPelaaja(nimiKentta.getText());
         nimiKentta.setEditable(!onnistui);
+        if (onnistui) {
+            nimiKentta.removeActionListener(this);
+        }
         kayttoliittyma.paivita();
     }
 }

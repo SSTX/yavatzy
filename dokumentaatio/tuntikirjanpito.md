@@ -19,3 +19,4 @@ Päivä | Tunnit | Kuvaus
 16.2.2017 | 5h | käyttöliittymän ohjelmointia
 17.2.2017 | 7h | käyttöliittymän ohjelmointia, aihemäärittelyn ja luokkakaavion päivitus, sekvenssikaaviot, 5. viikon deadline
 18.2.2017 | 3.5h | koodikatselmointi 2
+21.2.2017 | 0.5h | Käyttöliittymän hienosäätöä ja bugien korjausta

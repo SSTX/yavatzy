@@ -144,10 +144,19 @@ public class PeliTest {
         peli.lisaaPelaaja("Jokke");
         peli.lisaaPisteet("sattuma");
         peli.lisaaPisteet("sattuma");
-        peli.getPelaajat().stream().forEach((pelaaja) -> assertEquals(20,
-               (long) peli.getPistelista().pelaajanPisteetKierrokselta(pelaaja, "sattuma")));
+        assertEquals(20, (long)peli.getPistelista().pelaajanPisteetKierrokselta(peli.getPelaajat().get(0), "sattuma"));
+        assertEquals(19, (long)peli.getPistelista().pelaajanPisteetKierrokselta(peli.getPelaajat().get(1), "sattuma"));
     }
 
+    @Test
+    public void vuorojenKayttaminenLopettaaPelin() {
+        peli.lisaaPelaaja("Jalmari");
+        peli.lisaaPelaaja("Jokke");
+        for (int i = 0; i < 30; i++) {
+            peli.seuraavaVuoro();
+        }
+        assertTrue(peli.peliLoppu());
+    }
     @After
     public void tearDown() {
     }

@@ -31,13 +31,12 @@ public class Peli {
 
     /**
      * Luodaan peli annetuilla nopilla.
-     *
      * @param nopat pelin käyttämät nopat
+     * @param pelaajat peliin kuuluvat pelaajat
      */
-    public Peli(List<Noppa> nopat) {
+    public Peli(List<Noppa> nopat, List<Pelaaja> pelaajat) {
         this.kierros = 1;
         this.kierroksienKokonaismaara = 15;
-        this.pelaajat = new ArrayList<>();
         this.pistelista = new Pistelista();
         this.saannot = new Pisteytyssaannot();
         this.valitutNopat = new ArrayList<>();
@@ -49,14 +48,25 @@ public class Peli {
             }
         }
         this.nopat = nopat;
+        this.pelaajat = new ArrayList<>();
+        pelaajat.stream().forEach((pelaaja) -> this.lisaaPelaaja(pelaaja.getNimi()));
     }
 
     /**
-     * Luodaan peli oletusnopilla.
+     * Luodaan peli oletusnopilla ja ilman pelaajia.
      */
     public Peli() {
-        this(null);
+        this(null, new ArrayList<>());
     }
+
+    /**
+     * Luodaan peli ilman pelaajia.
+     * @param nopat pelin käyttämät nopat
+     */
+    public Peli(List<Noppa> nopat) {
+        this(nopat, new ArrayList<>());
+    }
+
 
     public List<Noppa> getNopat() {
         return nopat;
@@ -98,8 +108,7 @@ public class Peli {
     }
 
     /**
-     * Vuorossa oleva pelaaja vaihdetaan seuraavaan. Hänelle sallitaan kolme
-     * heittoa.
+     * Vuorossa oleva pelaaja vaihdetaan seuraavaan. 
      */
     public void seuraavaVuoro() {
         if (!this.getPelaajat().isEmpty()) {
@@ -161,10 +170,8 @@ public class Peli {
      * @return true, jos pisteiden lisääminen onnistui false, muuten
      */
     public boolean lisaaPisteet(String kierrosNimi) {
-        int pisteet = this.saannot
-            .pisteyta(kierrosNimi, this.getNopat());
-        boolean onnistui = this.getPistelista()
-            .lisaaPisteet(this.vuorossaOlevaPelaaja(), kierrosNimi, pisteet);
+        int pisteet = this.saannot.pisteyta(kierrosNimi, this.getNopat());
+        boolean onnistui = this.getPistelista().lisaaPisteet(this.vuorossaOlevaPelaaja(), kierrosNimi, pisteet);
         if (onnistui) {
             this.seuraavaVuoro();
         }

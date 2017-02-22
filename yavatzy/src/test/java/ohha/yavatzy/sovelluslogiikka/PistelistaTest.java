@@ -66,7 +66,7 @@ public class PistelistaTest {
 
     @Test
     public void pelaajanKokonaisPisteetOikein1() {
-        assertEquals(null, lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
+        assertEquals(0, (long)lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
     }
 
     @Test

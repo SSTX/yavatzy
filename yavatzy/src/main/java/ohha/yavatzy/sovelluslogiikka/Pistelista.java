@@ -16,6 +16,7 @@ import ohha.yavatzy.KierrosNimet;
  */
 public class Pistelista {
 
+    // Map<Pelaaja, Map<Kierrosnimi, Pisteet>>
     private Map<Pelaaja, Map<String, Integer>> pistelista;
     private int bonusPisteet;
     private int bonusRaja;

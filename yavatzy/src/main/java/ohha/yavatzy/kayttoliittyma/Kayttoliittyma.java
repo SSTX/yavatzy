@@ -1,6 +1,5 @@
 package ohha.yavatzy.kayttoliittyma;
 
-import ohha.yavatzy.kayttoliittyma.napit.PisteListaNappi;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -16,16 +15,12 @@ import javax.swing.WindowConstants;
 import ohha.yavatzy.sovelluslogiikka.Noppa;
 import ohha.yavatzy.sovelluslogiikka.Peli;
 import ohha.yavatzy.KierrosNimet;
-import ohha.yavatzy.kayttoliittyma.napit.NopanHeittoNappi;
-import ohha.yavatzy.kayttoliittyma.napit.NoppaNappi;
-import ohha.yavatzy.kayttoliittyma.napit.PelinAloitusNappi;
-import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanHeittoKuuntelija;
-import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanValintaKuuntelija;
-import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.PelaajanLisaysKuuntelija;
-import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.PelinAloitusKuuntelija;
 import ohha.yavatzy.sovelluslogiikka.Pelaaja;
-import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.PisteListaKuuntelija;
 
+import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.*;
+import ohha.yavatzy.kayttoliittyma.napit.*;
+
+import ohha.yavatzy.kayttoliittyma.Paivitettava;
 /**
  * Graafinen käyttöliittymä yatzy-pelille. Luo ikkunan ja käyttöliittymän
  * komponentit.
@@ -68,17 +63,28 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
     }
 
     /**
+     * Aloittaa uuden pelin samoilla pelaajilla.
+     */
+    public void uusiPeli() {
+        Peli uusiPeli = new Peli(null, this.peli.getPelaajat());
+        this.peli = new Peli(null, this.peli.getPelaajat());
+        this.paivitettavat.clear();
+        this.aloitaPeli();
+    }
+
+    /**
      * Avaa varsinaisen peli-ikkunan.
      */
     public void aloitaPeli() {
         this.frame.setVisible(false);
         this.frame.dispose();
         this.frame = new JFrame("Yavatzy");
-        this.frame.setPreferredSize(new Dimension(1280, 1000));
+        this.frame.setPreferredSize(new Dimension(800, 800));
         this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.luoKomponentit(frame.getContentPane());
         this.frame.pack();
         this.frame.setVisible(true);
+        this.paivita();
     }
 
     private void luoPelaajienLisaysRuutu(Container container) {
@@ -99,26 +105,29 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
             nimiKentta.addActionListener(new PelaajanLisaysKuuntelija(this.peli, this));
             paneeli.add(nimiKentta, rajat);
         }
+        rajat.gridy = this.pelaajienMaksimiMaara + 1;
         PelinAloitusNappi pelinAloitusNappi = new PelinAloitusNappi("Aloita peli", this.peli);
         pelinAloitusNappi.addActionListener(new PelinAloitusKuuntelija(this));
         this.paivitettavat.add(pelinAloitusNappi);
-        paneeli.add(pelinAloitusNappi);
+        paneeli.add(pelinAloitusNappi, rajat);
         this.paivita();
         container.add(paneeli);
     }
 
     private void luoKomponentit(Container container) {
         container.setLayout(new GridBagLayout());
+        GridBagConstraints ulkoRajat = new GridBagConstraints();
         JPanel pistelista = this.luoPisteLista();
         JPanel nopanHeittoPaneeli = this.luoNopanHeittoPaneeli();
-        container.add(pistelista);
-        container.add(nopanHeittoPaneeli);
+        container.add(pistelista, ulkoRajat);
+        ulkoRajat.gridy = 1;
+        container.add(nopanHeittoPaneeli, ulkoRajat);
         this.paivita();
     }
 
     private JPanel luoPisteLista() {
         JPanel paneeli = new JPanel();
-        paneeli.setPreferredSize(new Dimension(600, 800));
+        paneeli.setPreferredSize(new Dimension(100 + this.peli.getPelaajat().size() * 200, 800));
         paneeli.setLayout(new GridBagLayout());
         GridBagConstraints pisteListaRajat = new GridBagConstraints();
         pisteListaRajat.fill = GridBagConstraints.BOTH;
@@ -174,6 +183,12 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
         nopanHeittoNappi.addActionListener(new NopanHeittoKuuntelija(this.peli, this));
         this.paivitettavat.add(nopanHeittoNappi);
         paneeli.add(nopanHeittoNappi, rajat);
+        // uusi peli -nappi
+        rajat.gridx++;
+        UusiPeliNappi nappi = new UusiPeliNappi("Uusi peli", this.peli);
+        nappi.addActionListener(new UusiPeliKuuntelija(this));
+        this.paivitettavat.add(nappi);
+        paneeli.add(nappi, rajat);
         return paneeli;
     }
 }

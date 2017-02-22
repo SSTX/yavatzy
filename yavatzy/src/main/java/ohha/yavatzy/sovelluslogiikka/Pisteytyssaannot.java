@@ -5,11 +5,14 @@
  */
 package ohha.yavatzy.sovelluslogiikka;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import ohha.yavatzy.KierrosNimet;
 
 /**
  * Laskee pistemäärän, jonka nopat antavat tietylle yatzy-kierrokselle. Tarjoaa
@@ -21,6 +24,8 @@ public class Pisteytyssaannot {
     private int pieniSuoraPisteet;
     private int isoSuoraPisteet;
     private int yatzyPisteet;
+    private List<Integer> isoSuoraPisteluvut;
+    private List<Integer> pieniSuoraPisteluvut;
 
     /**
      * Hajautustaulun avaimet ovat yatzy-kierroksen nimiä. Arvot ovat
@@ -37,26 +42,15 @@ public class Pisteytyssaannot {
         this.pieniSuoraPisteet = 15;
         this.isoSuoraPisteet = 20;
         this.yatzyPisteet = 50;
+        this.isoSuoraPisteluvut = Arrays.asList(2, 3, 4, 5, 6);
+        this.pieniSuoraPisteluvut = Arrays.asList(1, 2, 3, 4, 5);
         this.metodit = new HashMap<>();
         // lisätään metodit tauluun
-        metodit.put("ykköset", (nopat) -> {
-            return this.laskePistelukujenSumma(nopat, 1);
-        });
-        metodit.put("kakkoset", (nopat) -> {
-            return this.laskePistelukujenSumma(nopat, 2);
-        });
-        metodit.put("kolmoset", (nopat) -> {
-            return this.laskePistelukujenSumma(nopat, 3);
-        });
-        metodit.put("neloset", (nopat) -> {
-            return this.laskePistelukujenSumma(nopat, 4);
-        });
-        metodit.put("vitoset", (nopat) -> {
-            return this.laskePistelukujenSumma(nopat, 5);
-        });
-        metodit.put("kutoset", (nopat) -> {
-            return this.laskePistelukujenSumma(nopat, 6);
-        });
+        for (int i : new int[]{1, 2, 3, 4, 5, 6}) {
+            metodit.put(KierrosNimet.kierrosNimet()[i - 1], (nopat) -> {
+                return this.laskePistelukujenSumma(nopat, i);
+            });
+        }
         metodit.put("pari", (nopat) -> {
             return this.montaSamaa(nopat, 2);
         });
@@ -106,16 +100,6 @@ public class Pisteytyssaannot {
 
     private List<Integer> muunnaPisteluvuiksi(List<Noppa> nopat) {
         return nopat.stream().map(Noppa::getPisteluku).collect(Collectors.toList());
-    }
-
-    private boolean kaikkiEri(List<Noppa> nopat) {
-        Map<Integer, List<Noppa>> pisteluvuittain = this.ryhmittelePisteluvunMukaan(nopat);
-        for (int i : pisteluvuittain.keySet()) {
-            if (pisteluvuittain.get(i).size() > 1) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private int montaSamaa(List<Noppa> nopat, int kuinkaMonta) {
@@ -189,14 +173,14 @@ public class Pisteytyssaannot {
     }
 
     private int pieniSuora(List<Noppa> nopat) {
-        if (this.kaikkiEri(nopat) && this.muunnaPisteluvuiksi(nopat).contains(1)) {
+        if (this.muunnaPisteluvuiksi(nopat).containsAll(this.pieniSuoraPisteluvut)) {
             return this.pieniSuoraPisteet;
-        }
+        } 
         return 0;
     }
 
     private int isoSuora(List<Noppa> nopat) {
-        if (this.kaikkiEri(nopat) && this.muunnaPisteluvuiksi(nopat).contains(6)) {
+        if (this.muunnaPisteluvuiksi(nopat).containsAll(this.isoSuoraPisteluvut)) {
             return this.isoSuoraPisteet;
         }
         return 0;

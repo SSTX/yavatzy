@@ -52,6 +52,9 @@ public class PisteListaNappi extends JButton implements Paivitettava {
                 && !this.kierros.equals("yhteensä")
                 && !taytetty 
                 && this.pelaaja.equals(this.peli.vuorossaOlevaPelaaja()));
+        if (this.isEnabled()) {
+            this.setText(Integer.toString(this.saannot.pisteyta(this.kierros, this.peli.getNopat())));
+        }
     }
 
     public String getKierros() {

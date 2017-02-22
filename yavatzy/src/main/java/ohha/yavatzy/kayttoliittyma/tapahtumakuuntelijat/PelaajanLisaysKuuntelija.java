@@ -33,7 +33,7 @@ public class PelaajanLisaysKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         JTextField nimiKentta = (JTextField) ae.getSource();
-        boolean onnistui = this.peli.lisaaPelaaja(nimiKentta.getText());
+        boolean onnistui = this.peli.lisaaPelaaja(nimiKentta.getText() + " ");
         nimiKentta.setEditable(!onnistui);
         if (onnistui) {
             nimiKentta.removeActionListener(this);

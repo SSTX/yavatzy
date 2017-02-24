@@ -6,7 +6,7 @@ __Käyttäjät:__ pelaaja(t)
 - Pelaajanimimerkin lisääminen
 - Heitettävien noppien valitseminen
 - Noppien heittäminen
-- Tuloksen kirjaaminen
+- Pisteiden kirjaaminen
 
 ## Luokkakaavio
 ![Luokkakaavio](kaavio.png)

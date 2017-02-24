@@ -5,6 +5,7 @@
  */
 package ohha.yavatzy.sovelluslogiikka;
 
+import ohha.yavatzy.sovelluslogiikka.domain.Pelaaja;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -51,8 +52,8 @@ public class PistelistaTest {
         lista.lisaaPelaaja(irmeli);
         lista.lisaaPisteet(irmeli, "kolmoset", 3);
         lista.lisaaPisteet(irmeli, "pari", 4);
-        assertEquals(3, (long)lista.pelaajanPisteetKierrokselta(irmeli, "kolmoset"));
-        assertEquals(4, (long)lista.pelaajanPisteetKierrokselta(irmeli, "pari"));
+        assertEquals(3, (long) lista.pelaajanPisteetKierrokselta(irmeli, "kolmoset"));
+        assertEquals(4, (long) lista.pelaajanPisteetKierrokselta(irmeli, "pari"));
     }
 
     @Test
@@ -61,19 +62,19 @@ public class PistelistaTest {
         lista.lisaaPelaaja(irmeli);
         lista.lisaaPisteet(irmeli, "pari", 2);
         lista.lisaaPisteet(irmeli, "pari", 4);
-        assertEquals(2, (long)lista.pelaajanPisteetKierrokselta(irmeli, "pari"));
+        assertEquals(2, (long) lista.pelaajanPisteetKierrokselta(irmeli, "pari"));
     }
 
     @Test
     public void pelaajanKokonaisPisteetOikein1() {
-        assertEquals(0, (long)lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
+        assertEquals(0, (long) lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
     }
 
     @Test
     public void pelaajanKokonaisPisteetOikein2() {
         lista.lisaaPisteet(jalmari, "pari", 2);
         lista.lisaaPisteet(jalmari, "kolmoisluku", 9);
-        assertEquals(11, (long)lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
+        assertEquals(11, (long) lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
     }
 
     @Test
@@ -81,7 +82,7 @@ public class PistelistaTest {
         lista.lisaaPisteet(jalmari, "yatzy", 50);
         lista.lisaaPisteet(jalmari, "neloisluku", 24);
         lista.lisaaPisteet(jalmari, "kutoset", 30);
-        assertEquals(104, (long)lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
+        assertEquals(104, (long) lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
     }
 
     @Test
@@ -89,7 +90,7 @@ public class PistelistaTest {
         lista.lisaaPisteet(jalmari, "kutoset", 30);
         lista.lisaaPisteet(jalmari, "vitoset", 25);
         lista.lisaaPisteet(jalmari, "neloset", 8);
-        assertEquals(113, (long)lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
+        assertEquals(113, (long) lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
     }
 
     @Test
@@ -97,7 +98,7 @@ public class PistelistaTest {
         lista.lisaaPisteet(jalmari, "kutoset", 30);
         lista.lisaaPisteet(jalmari, "vitoset", 25);
         lista.lisaaPisteet(jalmari, "kolmoset", 9);
-        assertEquals(114, (long)lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
+        assertEquals(114, (long) lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
     }
 
     @Test
@@ -105,8 +106,16 @@ public class PistelistaTest {
         lista.lisaaPisteet(jalmari, "kutoset", 30);
         lista.lisaaPisteet(jalmari, "neloset", 20);
         lista.lisaaPisteet(jalmari, "kolmoset", 12);
-        assertEquals(62, (long)lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
+        assertEquals(62, (long) lista.pelaajanPisteetKierrokselta(jalmari, "yhteensä"));
     }
+
+    @Test
+    public void matkaaBonukseenPalauttaaOikein() {
+        lista.lisaaPisteet(jalmari, "vitoset", 25);
+        lista.lisaaPisteet(jalmari, "ykköset", 3);
+        assertEquals(35, lista.matkaaBonukseen(jalmari));
+    }
+
 
     @After
     public void tearDown() {

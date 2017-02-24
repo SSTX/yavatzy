@@ -3,20 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ohha.yavatzy.sovelluslogiikka;
+package ohha.yavatzy.sovelluslogiikka.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ohha.yavatzy.TestRandom;
-import ohha.yavatzy.sovelluslogiikka.Noppa;
-import ohha.yavatzy.sovelluslogiikka.Pelaaja;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -42,6 +38,22 @@ public class PelaajaTest {
     @Test
     public void pelaajanToStringOikein() {
         assertEquals("Seppo", pelaaja.toString());
+    }
+    
+    @Test
+    public void equalsPalauttaaTrueSamallaViitteella() {
+        assertTrue(pelaaja.equals(pelaaja));
+    }
+    
+    @Test
+    public void equalsPalauttaaTrueJosNimetSamat() {
+        Pelaaja seppo = new Pelaaja("Seppo");
+        assertTrue(pelaaja.equals(seppo));
+    }
+    
+    @Test
+    public void equalsPalauttaaFalseJosNimetEri() {
+        assertFalse(pelaaja.equals(pelaaja2));
     }
     
 

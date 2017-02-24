@@ -7,7 +7,7 @@ package ohha.yavatzy.kayttoliittyma.napit;
 
 import javax.swing.JToggleButton;
 import ohha.yavatzy.kayttoliittyma.Paivitettava;
-import ohha.yavatzy.sovelluslogiikka.Noppa;
+import ohha.yavatzy.sovelluslogiikka.domain.Noppa;
 import ohha.yavatzy.sovelluslogiikka.Peli;
 
 /**
@@ -34,6 +34,7 @@ public class NoppaNappi extends JToggleButton implements Paivitettava {
     public void paivita() {
         this.setText(this.noppa.toString());
         this.setSelected(this.peli.getValitutNopat().contains(this.noppa));
+        this.setEnabled(this.peli.heittojaJaljella());
     }
     
     public Noppa getNoppa() {

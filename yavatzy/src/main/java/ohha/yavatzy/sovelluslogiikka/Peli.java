@@ -5,6 +5,8 @@
  */
 package ohha.yavatzy.sovelluslogiikka;
 
+import ohha.yavatzy.sovelluslogiikka.domain.Noppa;
+import ohha.yavatzy.sovelluslogiikka.domain.Pelaaja;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,19 +17,10 @@ import java.util.stream.Collectors;
  */
 public class Peli {
 
-    private List<Pelaaja> pelaajat;
-    private int vuoroNumero;
     private Pistelista pistelista;
-    private int kierros;
-    private int kierroksienKokonaismaara;
     private Pisteytyssaannot saannot;
-    private List<Noppa> nopat;
-    private int heittojaJaljella;
-
-    /**
-     * Nämä nopat heitetään, kun kutsutaan pelin metodia heitaNopat()
-     */
-    private List<Noppa> valitutNopat;
+    private VuoroKirjanpito vuoroKirjanpito;
+    private NopanHeittaja nopanHeittaja;
 
     /**
      * Luodaan peli annetuilla nopilla.
@@ -35,20 +28,10 @@ public class Peli {
      * @param pelaajat peliin kuuluvat pelaajat
      */
     public Peli(List<Noppa> nopat, List<Pelaaja> pelaajat) {
-        this.kierros = 1;
-        this.kierroksienKokonaismaara = 15;
         this.pistelista = new Pistelista();
         this.saannot = new Pisteytyssaannot();
-        this.valitutNopat = new ArrayList<>();
-        this.heittojaJaljella = 2; // nopat alustetaan satunnaisiin lukuihin
-        if (nopat == null) {
-            nopat = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                nopat.add(new Noppa(6));
-            }
-        }
-        this.nopat = nopat;
-        this.pelaajat = new ArrayList<>();
+        this.vuoroKirjanpito = new VuoroKirjanpito(15);
+        this.nopanHeittaja = new NopanHeittaja(nopat);
         pelaajat.stream().forEach((pelaaja) -> this.lisaaPelaaja(pelaaja.getNimi()));
     }
 
@@ -69,25 +52,20 @@ public class Peli {
 
 
     public List<Noppa> getNopat() {
-        return nopat;
+        return this.nopanHeittaja.getNopat();
     }
 
     public List<Pelaaja> getPelaajat() {
-        return pelaajat;
+        return this.vuoroKirjanpito.getPelaajat();
     }
 
     public Pistelista getPistelista() {
         return pistelista;
     }
 
-    public int getVuoroNumero() {
-        return vuoroNumero;
-    }
-
     public List<Noppa> getValitutNopat() {
-        return this.valitutNopat;
+        return this.nopanHeittaja.getValitutNopat();
     }
-
 
     /**
      * Lisää nopan heitettäväksi merkittyjen listalle.
@@ -111,19 +89,8 @@ public class Peli {
      * Vuorossa oleva pelaaja vaihdetaan seuraavaan. 
      */
     public void seuraavaVuoro() {
-        if (!this.getPelaajat().isEmpty()) {
-            this.vuoroNumero = (this.vuoroNumero + 1) % this.getPelaajat().size();
-        }
-        if (this.vuoroNumero == 0) {
-            this.seuraavaKierros();
-        }
-        this.heittojaJaljella = 3;
-        this.valitutNopat = new ArrayList<>(this.nopat);
-        this.heitaNopat();
-    }
-
-    private void seuraavaKierros() {
-        this.kierros++;
+        this.vuoroKirjanpito.seuraavaVuoro();
+        this.nopanHeittaja.seuraavaVuoro();
     }
 
     /**
@@ -132,7 +99,7 @@ public class Peli {
      * @return true, jos peli on päättynyt false, muuten
      */
     public boolean peliLoppu() {
-        return this.kierros > this.kierroksienKokonaismaara;
+        return this.vuoroKirjanpito.kierroksetKayty();
     }
 
     /**
@@ -141,10 +108,7 @@ public class Peli {
      * @return null, jos pelaajia ei ole. Vuoronumeron määräämä pelaaja, muuten.
      */
     public Pelaaja vuorossaOlevaPelaaja() {
-        if (this.getPelaajat().isEmpty()) {
-            return null;
-        }
-        return this.getPelaajat().get(this.getVuoroNumero());
+        return this.vuoroKirjanpito.vuorossaOlevaPelaaja();
     }
 
     /**
@@ -154,13 +118,7 @@ public class Peli {
      */
     public boolean lisaaPelaaja(String nimi) {
         Pelaaja lisattava = new Pelaaja(nimi);
-        boolean onnistui = false;
-        if (!this.getPelaajat().contains(lisattava)) {
-            this.getPelaajat().add(lisattava);
-            onnistui = true;
-        }
-        onnistui = this.getPistelista().lisaaPelaaja(lisattava);
-        return onnistui;
+        return this.vuoroKirjanpito.lisaaPelaaja(lisattava) && this.pistelista.lisaaPelaaja(lisattava);
     }
 
     /**
@@ -179,29 +137,10 @@ public class Peli {
     }
 
     /**
-     * Palauttaa pelin noppien nykyiset pisteluvut kokonaislukuina.
-     *
-     * @return noppien pisteluvut kokonaislukulistana
-     */
-    public List<Integer> nykyisetPisteluvut() {
-        return this.getNopat()
-            .stream()
-            .map(Noppa::getPisteluku)
-            .collect(Collectors.toList());
-    }
-
-    /**
-     * Heitetään ne nopat, jotka oliomuuttuja määrää heitettäviksi. Vähennetään
-     * vuoron jäljellä olevien heittojen määrää yhdellä. Poistetaan kaikkien noppien valinta.
+     * Heitetään käyttöliittymästä valitut nopat.
      */
     public void heitaNopat() {
-        if (this.voidaanHeittaa()) {
-            for (Noppa noppa : this.getValitutNopat()) {
-                noppa.heita();
-            }
-            this.getValitutNopat().clear();
-            this.heittojaJaljella--;
-        }
+        this.nopanHeittaja.heitaValitutNopat();
     }
 
     /**
@@ -210,7 +149,15 @@ public class Peli {
      * @return true, jos yatzyn säännöt sallivat noppien heittämisen. false,
      * muuten.
      */
-    public boolean voidaanHeittaa() {
-        return this.heittojaJaljella > 0 && !this.valitutNopat.isEmpty();
+    public boolean heittojaJaljella() {
+        return this.nopanHeittaja.heittojaJaljella();
+    }
+    
+    /**
+     * Kertoo, onko noppia valittu heitettäväksi vai ei.
+     * @return true jos noppia on valittu, false muuten
+     */
+    public boolean noppiaValittu() {
+        return this.nopanHeittaja.noppiaValittu();
     }
 }

@@ -7,12 +7,13 @@ package ohha.yavatzy.kayttoliittyma.napit;
 
 import javax.swing.JButton;
 import ohha.yavatzy.kayttoliittyma.Paivitettava;
-import ohha.yavatzy.sovelluslogiikka.Pelaaja;
+import ohha.yavatzy.sovelluslogiikka.domain.Pelaaja;
 import ohha.yavatzy.sovelluslogiikka.Peli;
 import ohha.yavatzy.sovelluslogiikka.Pisteytyssaannot;
 
 /**
- * Lisätty JButton, joka tietää, mikä yatzy-kierros ja pelaaja siihen liittyy. Tietää myös, onko siihen tallennettu jonkin kierroksen pistemäärä.
+ * Lisätty JButton, joka tietää, mikä yatzy-kierros ja pelaaja siihen liittyy.
+ * Tietää myös, onko siihen tallennettu jonkin kierroksen pistemäärä.
  *
  * @author ttiira
  */
@@ -26,6 +27,7 @@ public class PisteListaNappi extends JButton implements Paivitettava {
 
     /**
      * Luo PisteListaNappi-olion.
+     *
      * @param nimi napin nimi, annetaan yläluokan konstruktorille
      * @param kierros yatzy-kierros, johon tämä nappi liittyy
      * @param pelaaja pelaaja, johon tämä nappi liittyy
@@ -43,14 +45,16 @@ public class PisteListaNappi extends JButton implements Paivitettava {
     @Override
     public void paivita() {
         Integer pisteet = this.peli.getPistelista().pelaajanPisteetKierrokselta(pelaaja, kierros);
-        if (pisteet == null) {
+        if (this.kierros.equals("bonus") && pisteet == null) {
+            this.setText("(" + Integer.toString(this.peli.getPistelista().matkaaBonukseen(this.pelaaja)) + ")");
+        } else if (pisteet == null) {
             this.setText(" ");
         } else {
             this.setText(Integer.toString(pisteet));
         }
         this.setEnabled(!this.kierros.equals("bonus")
                 && !this.kierros.equals("yhteensä")
-                && !taytetty 
+                && !taytetty
                 && this.pelaaja.equals(this.peli.vuorossaOlevaPelaaja()));
         if (this.isEnabled()) {
             this.setText(Integer.toString(this.saannot.pisteyta(this.kierros, this.peli.getNopat())));

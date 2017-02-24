@@ -5,6 +5,8 @@
  */
 package ohha.yavatzy.sovelluslogiikka;
 
+import java.util.Arrays;
+import ohha.yavatzy.sovelluslogiikka.domain.Pelaaja;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,8 +81,7 @@ public class Pistelista {
      * @return pelaajan kierroksen pistemäärä
      */
     public Integer pelaajanPisteetKierrokselta(Pelaaja pelaaja, String kierrosNimi) {
-        if (this.getPistelista().containsKey(pelaaja)
-                && this.getPistelista().get(pelaaja).containsKey(kierrosNimi)) {
+        if (this.getPistelista().containsKey(pelaaja)) {
             return this.getPistelista().get(pelaaja).get(kierrosNimi);
         }
         return null;
@@ -112,5 +113,21 @@ public class Pistelista {
             }
         }
         return huomioitavatPisteet >= this.bonusRaja;
+    }
+    
+    /**
+     * Kertoo kuinka monta pistettä lisää pelaaja tarvitsee saadakseen bonuksen.
+     * @param pelaaja Pelaaja, jolle tarvittava pistemäärä lasketaan.
+     * @return Pelaajan tarvitsemien pisteiden määrä. Bonuskierrosten pisteiden erotus 63:sta.
+     */
+    public int matkaaBonukseen(Pelaaja pelaaja) {
+        int tavoite = this.bonusRaja;
+        for (String kierros : KierrosNimet.bonusKierrosNimet()) {
+            Integer pisteet = this.pelaajanPisteetKierrokselta(pelaaja, kierros);
+            if (pisteet != null) {
+                tavoite -= pisteet;
+            }
+        }
+        return tavoite;
     }
 }

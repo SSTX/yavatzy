@@ -6,8 +6,10 @@ import ohha.yavatzy.kayttoliittyma.Paivitettava;
 import ohha.yavatzy.kayttoliittyma.napit.NoppaNappi;
 
 import ohha.yavatzy.sovelluslogiikka.Peli;
+
 /**
- * ActionListener-rajapinnan toteuttava luokka, jonka vastuulla on merkitä noppia heitettäväksi peli-oliossa.
+ * ActionListener-rajapinnan toteuttava luokka, jonka vastuulla on merkitä
+ * noppia heitettäväksi peli-oliossa.
  */
 public class NopanValintaKuuntelija implements ActionListener {
 
@@ -16,8 +18,10 @@ public class NopanValintaKuuntelija implements ActionListener {
 
     /**
      * Luodaan tapahtumakuuntelija.
+     *
      * @param peli peli, johon kuuntelijan hoitamat nopat kuuluvat
-     * @param kayttoliittyma käyttöliittymä, jonka tapahtumia tämä luokka kuuntelee
+     * @param kayttoliittyma käyttöliittymä, jonka tapahtumia tämä luokka
+     * kuuntelee
      */
     public NopanValintaKuuntelija(Peli peli, Paivitettava kayttoliittyma) {
         this.peli = peli;
@@ -27,10 +31,10 @@ public class NopanValintaKuuntelija implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         NoppaNappi noppaNappi = (NoppaNappi) ae.getSource();
-        if (!noppaNappi.isSelected()) {
-            this.peli.poistaNopanValinta(noppaNappi.getNoppa());
-        } else {
+        if (noppaNappi.isSelected()) {
             this.peli.valitseNoppa(noppaNappi.getNoppa());
+        } else {
+            this.peli.poistaNopanValinta(noppaNappi.getNoppa());
         }
         this.kayttoliittyma.paivita();
     }

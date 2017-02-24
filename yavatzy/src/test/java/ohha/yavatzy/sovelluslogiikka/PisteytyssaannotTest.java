@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ohha.yavatzy.TestRandom;
-import ohha.yavatzy.sovelluslogiikka.Noppa;
+import ohha.yavatzy.sovelluslogiikka.domain.Noppa;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertEquals;
 

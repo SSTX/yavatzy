@@ -5,6 +5,7 @@
  */
 package ohha.yavatzy.sovelluslogiikka;
 
+import ohha.yavatzy.sovelluslogiikka.domain.Noppa;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

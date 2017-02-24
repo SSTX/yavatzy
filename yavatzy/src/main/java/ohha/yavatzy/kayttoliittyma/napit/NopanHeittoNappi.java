@@ -28,7 +28,7 @@ public class NopanHeittoNappi extends JButton implements Paivitettava {
 
     @Override
     public void paivita() {
-        this.setEnabled(this.peli.voidaanHeittaa());
+        this.setEnabled(this.peli.heittojaJaljella() && this.peli.noppiaValittu());
     }
     
 }

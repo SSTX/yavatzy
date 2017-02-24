@@ -12,10 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import ohha.yavatzy.sovelluslogiikka.Noppa;
+import ohha.yavatzy.sovelluslogiikka.domain.Noppa;
 import ohha.yavatzy.sovelluslogiikka.Peli;
 import ohha.yavatzy.KierrosNimet;
-import ohha.yavatzy.sovelluslogiikka.Pelaaja;
+import ohha.yavatzy.sovelluslogiikka.domain.Pelaaja;
 
 import ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.*;
 import ohha.yavatzy.kayttoliittyma.napit.*;

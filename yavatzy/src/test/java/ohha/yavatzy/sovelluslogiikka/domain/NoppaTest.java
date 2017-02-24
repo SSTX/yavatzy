@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ohha.yavatzy.sovelluslogiikka;
+package ohha.yavatzy.sovelluslogiikka.domain;
 
 import java.util.Random;
 import ohha.yavatzy.TestRandom;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -59,17 +60,24 @@ public class NoppaTest {
     }
     
     @Test
-    public void equalsToimiiSamallaViitteella() {
+    public void equalsPalauttaaTrueSamallaViitteella() {
         Noppa testi = noppa;
         assertTrue(testi.equals(noppa));
     }
     
     @Test
-    public void equalsToimiiJosRandomOnSama() {
+    public void equalsPalauttaaTrueJosRandomOnSama() {
         Random rand = new Random();
         Noppa n1 = new Noppa(rand);
         Noppa n2 = new Noppa(rand);
         assertTrue(n1.equals(n2));
+    }
+    
+    @Test
+    public void equalsPalauttaaFalseJosRandomEri() {
+        Noppa n1 = new Noppa(new Random());
+        Noppa n2 = new Noppa(new Random());
+        assertFalse(n1.equals(n2));
     }
     
     @Test

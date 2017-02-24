@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 18,
-             Errors: 2,
+      <title>File: 22,
+             Errors: 0,
              Warnings: 0,
              Infos: 0
       </title>
@@ -44,6 +44,20 @@ under the License.
             </tr>
           </thead>
           <tbody>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.sovelluslogiikka.VuoroKirjanpito.java">ohha/yavatzy/sovelluslogiikka/VuoroKirjanpito.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.NopanValintaKuuntelija.java">ohha/yavatzy/kayttoliittyma/tapahtumakuuntelijat/NopanValintaKuuntelija.java</a>
@@ -139,7 +153,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
               </tr>
                           <tr>
@@ -172,20 +186,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.sovelluslogiikka.Pelaaja.java">ohha/yavatzy/sovelluslogiikka/Pelaaja.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="${project.url}/checkstyle.html#ohha.yavatzy.sovelluslogiikka.Peli.java">ohha/yavatzy/sovelluslogiikka/Peli.java</a>
                 </td>
                 <td>
@@ -195,12 +195,26 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.napit.PelinAloitusNappi.java">ohha/yavatzy/kayttoliittyma/napit/PelinAloitusNappi.java</a>
+                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.sovelluslogiikka.domain.Pelaaja.java">ohha/yavatzy/sovelluslogiikka/domain/Pelaaja.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.sovelluslogiikka.NopanHeittaja.java">ohha/yavatzy/sovelluslogiikka/NopanHeittaja.java</a>
                 </td>
                 <td>
                   0
@@ -228,7 +242,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.napit.NoppaNappi.java">ohha/yavatzy/kayttoliittyma/napit/NoppaNappi.java</a>
+                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.napit.PelinAloitusNappi.java">ohha/yavatzy/kayttoliittyma/napit/PelinAloitusNappi.java</a>
                 </td>
                 <td>
                   0
@@ -256,6 +270,34 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.napit.NoppaNappi.java">ohha/yavatzy/kayttoliittyma/napit/NoppaNappi.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.tapahtumakuuntelijat.UusiPeliKuuntelija.java">ohha/yavatzy/kayttoliittyma/tapahtumakuuntelijat/UusiPeliKuuntelija.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.napit.NopanHeittoNappi.java">ohha/yavatzy/kayttoliittyma/napit/NopanHeittoNappi.java</a>
                 </td>
                 <td>
@@ -270,7 +312,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.sovelluslogiikka.Noppa.java">ohha/yavatzy/sovelluslogiikka/Noppa.java</a>
+                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.napit.UusiPeliNappi.java">ohha/yavatzy/kayttoliittyma/napit/UusiPeliNappi.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.sovelluslogiikka.domain.Noppa.java">ohha/yavatzy/sovelluslogiikka/domain/Noppa.java</a>
                 </td>
                 <td>
                   0

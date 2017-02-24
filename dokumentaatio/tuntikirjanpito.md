@@ -17,8 +17,8 @@ Päivä | Tunnit | Kuvaus
 10.2.2017 | 11 | Käyttöliittymän ohjelmointia, refaktorointia, testejä, javadocin kirjoittamista
 15.2.2017 | 1 | käyttöliittymän suunnittelua ja ohjelmointia
 16.2.2017 | 5 | käyttöliittymän ohjelmointia
-17.2.2017 | 7 | käyttöliittymän ohjelmointia, aihemäärittelyn ja luokkakaavion päivitus, sekvenssikaaviot, 5. viikon deadline
+17.2.2017 | 7 | käyttöliittymän ohjelmointia, aihemäärittelyn ja luokkakaavion päivitys, sekvenssikaaviot
 18.2.2017 | 3.5 | koodikatselmointi 2
 21.2.2017 | 0.5 | Käyttöliittymän hienosäätöä ja bugien korjausta
 22.2.2017 | 3 | Refaktorointia ja käyttöliittymän hienosäätöä
-24.2.2017 | 5 | refaktorointia ja käyttöliittymän hienosäätöä
+24.2.2017 | 5 | refaktorointia ja käyttöliittymän hienosäätöä, kaavioita, rakennekuvaus, käyttöohjeet

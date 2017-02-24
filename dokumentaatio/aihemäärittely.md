@@ -15,8 +15,12 @@ __Käyttäjät:__ pelaaja(t)
 
 ### Pelaajan lisääminen
 
-![Sekvenssikaavio: Pelaajan lisäys](sekvenssi_pelaajan_lisäys.png)
+![Sekvenssikaavio: Pelaajan lisääminen](sekvenssi_pelaajan_lisäys.png)
 
-### Nopan valinta
+### Pisteiden kirjaaminen
 
-![Sekvenssikaavio: Nopan valinta](sekvenssi_nopan_valinta.png)
+![Sekvenssikaavio: Pisteiden kirjaaminen](sekvenssi_pisteiden_kirjaus.png)
+
+### Noppien heittäminen
+
+![Sekvenssikaavio: Noppien heittäminen](sekvenssi_nopan_heitto.png)

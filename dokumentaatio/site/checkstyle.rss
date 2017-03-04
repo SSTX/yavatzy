@@ -228,20 +228,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.Main.java">ohha/yavatzy/Main.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.napit.PelinAloitusNappi.java">ohha/yavatzy/kayttoliittyma/napit/PelinAloitusNappi.java</a>
                 </td>
                 <td>
@@ -256,7 +242,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.Kayttoliittyma.java">ohha/yavatzy/kayttoliittyma/Kayttoliittyma.java</a>
+                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.Main.java">ohha/yavatzy/Main.java</a>
                 </td>
                 <td>
                   0
@@ -271,6 +257,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.napit.NoppaNappi.java">ohha/yavatzy/kayttoliittyma/napit/NoppaNappi.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#ohha.yavatzy.kayttoliittyma.Kayttoliittyma.java">ohha/yavatzy/kayttoliittyma/Kayttoliittyma.java</a>
                 </td>
                 <td>
                   0

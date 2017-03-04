@@ -22,3 +22,4 @@ Päivä | Tunnit | Kuvaus
 21.2.2017 | 0.5 | Käyttöliittymän hienosäätöä ja bugien korjausta
 22.2.2017 | 3 | Refaktorointia ja käyttöliittymän hienosäätöä
 24.2.2017 | 5 | refaktorointia ja käyttöliittymän hienosäätöä, kaavioita, rakennekuvaus, käyttöohjeet
+4.3.2017 | 2 | javadocin ja käyttöohjeiden päivitys, pit, checkstyle, git-release, loppupalautuksen juttuja

@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Pelin logiikka. Pitää kirjaa vuoroista, kierrosnumerosta, pelaajista. Tietää
- * myös noppien heittämiseen liittyvät säännöt.
+ * Yatzy-pelin tilaa kuvaava luokka. Pitää sisällään vuorokirjanpidon, pistelistan, pisteytyssäännöt ja nopanheittäjän, joiden metodeita käyttäen peli etenee.
  */
 public class Peli {
 

@@ -59,7 +59,7 @@ public class VuoroKirjanpito {
     }
 
     /**
-     * Vaihtaa vuorossa olevan pelaajan järjestyksessä seuraavaan. Viimeisestä palataan ensimmäiseen.
+     * Vaihtaa vuorossa olevan pelaajan järjestyksessä seuraavaan. Viimeisestä pelaajasta palataan ensimmäiseen, ja siirrytään seuraavaan kierrokseen.
      */
     public void seuraavaVuoro() {
         this.vuoroNumero++;

@@ -87,10 +87,9 @@ public class NopanHeittaja {
     }
 
     /**
-     * Kertoo, voiko vuorossa oleva pelaaja heittää vielä noppia.
+     * Kertoo, voidaanko noppia vielä heittää.
      *
-     * @return true, jos yatzyn säännöt sallivat noppien heittämisen. false,
-     * muuten.
+     * @return True, jos noppia on heitetty vähemmän kuin kolme kertaa vuoron vaihtumisen jälkeen. False muuten.
      */
     public boolean heittojaJaljella() {
         return this.heittojaJaljella > 0;

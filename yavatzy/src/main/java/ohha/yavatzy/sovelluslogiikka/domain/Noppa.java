@@ -34,7 +34,7 @@ public class Noppa {
     }
 
     /**
-     * Luodaan noppa oletussivumäärällä.
+     * Luodaan noppa oletussivumäärällä 6.
      *
      * @param rand pistelukujen arpomiseen tarvittava Random-olio
      */
@@ -52,7 +52,7 @@ public class Noppa {
     }
 
     /**
-     * Luodaan noppa oletusarvoilla.
+     * Luodaan noppa oletusarvoilla (sivumäärä 6, oletussatunnaisuus).
      */
     public Noppa() {
         this(6, new Random());

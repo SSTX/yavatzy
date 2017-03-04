@@ -78,7 +78,7 @@ public class Pistelista {
      *
      * @param pelaaja pisteiden omistaja
      * @param kierrosNimi pisteytetty kierros
-     * @return pelaajan kierroksen pistemäärä
+     * @return Pisteiden määrä, jos pelaaja on kirjannut pisteet kyseiselle kierrokselle. null muuten.
      */
     public Integer pelaajanPisteetKierrokselta(Pelaaja pelaaja, String kierrosNimi) {
         if (this.getPistelista().containsKey(pelaaja)) {
